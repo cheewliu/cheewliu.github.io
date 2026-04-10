@@ -882,6 +882,61 @@ footer {
 }
 
 /* =========================================================
+   CERTIFICATIONS CARD
+   ========================================================= */
+.certs-card {
+  margin-top: 1.75rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: 6px;
+  padding: 1.25rem 1.5rem;
+}
+
+.certs-header {
+  margin-bottom: 0.9rem;
+}
+
+.certs-title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+
+.certs-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.cert-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+}
+
+.cert-dot {
+  color: var(--accent);
+  font-size: 0.7rem;
+  margin-top: 3px;
+  flex-shrink: 0;
+}
+
+.cert-name {
+  display: block;
+  font-size: 0.83rem;
+  color: var(--text);
+  margin-bottom: 0.1rem;
+}
+
+.cert-meta {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-dim);
+}
+
+/* =========================================================
    PATENTS CARD
    ========================================================= */
 .patents-card {
@@ -953,6 +1008,20 @@ footer {
   font-size: 0.83rem;
   color: var(--text-muted);
   line-height: 1.4;
+  flex: 1;
+}
+
+.patent-uspto {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: #92400e;
+  background: #78350f22;
+  border: 1px solid #92400e55;
+  padding: 1px 7px;
+  border-radius: 20px;
+  white-space: nowrap;
+  align-self: center;
+  flex-shrink: 0;
 }
 
 /* =========================================================
