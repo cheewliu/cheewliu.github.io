@@ -1,8 +1,0 @@
-name            = "jacky-portfolio-proxy"
-main            = "src/index.js"
-compatibility_date = "2025-04-10"
-account_id      = "01017826e4df7eca0d371104fdd2d9d9"
-
-[[kv_namespaces]]
-binding = "RATE_LIMIT"
-id      = "09a835d978664fa58e858f81821fc4c5"
