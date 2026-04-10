@@ -13,6 +13,7 @@
       --light:      #666;
       --border:     #d4d4d4;
       --accent:     #1a56db;
+      --accent-bg:  #e8f0fd;
       --bg:         #ffffff;
     }
 
@@ -33,11 +34,12 @@
     .r-header {
       margin-bottom: 1.2em;
       padding-bottom: 0.9em;
-      border-bottom: 2px solid var(--accent);
+      border-bottom: none;
+      background: linear-gradient(to right, var(--accent), transparent) bottom / 100% 1.5px no-repeat;
     }
 
     .r-name {
-      font-size: 20pt;
+      font-size: 22pt;
       font-weight: 700;
       color: var(--text);
       letter-spacing: -0.3px;
@@ -58,7 +60,7 @@
     .r-contact span { margin: 0 0.3em; }
 
     /* ── Sections ── */
-    .r-section { margin-bottom: 1.1em; }
+    .r-section { margin-bottom: 1.4em; }
 
     .r-section-title {
       font-size: 7.5pt;
@@ -78,7 +80,11 @@
     }
 
     /* ── Jobs ── */
-    .r-job { margin-bottom: 0.75em; }
+    .r-job {
+      margin-bottom: 0.75em;
+      border-left: 3px solid var(--accent);
+      padding-left: 0.75em;
+    }
 
     .r-job-header {
       display: flex;
@@ -157,21 +163,29 @@
       font-size: 9.5pt;
     }
 
-    .r-cert-name, .r-patent-num {
+    .r-cert-name {
       font-weight: 600;
       color: var(--text);
     }
 
     .r-patent-num {
+      display: inline-block;
       font-family: 'Courier New', monospace;
+      font-size: 8pt;
+      font-weight: 600;
       color: var(--accent);
-      font-size: 8.5pt;
+      background: var(--accent-bg);
+      padding: 1px 7px;
+      border-radius: 20px;
+      letter-spacing: 0.03em;
     }
 
     .r-cert-issuer, .r-patent-title {
       font-size: 8.5pt;
       color: var(--light);
     }
+
+    .r-patent-title { margin-top: 0.15em; }
 
     /* ── Print ── */
     @media print {
@@ -279,6 +293,22 @@
   </section>
 
   <section class="r-section">
+    <h2 class="r-section-title">Patents</h2>
+    <div class="r-patent">
+      <div class="r-patent-header">
+        <span class="r-patent-num">US20220260714A1</span>
+      </div>
+      <p class="r-patent-title">Automated LiDAR Target Simulation Scanning Systems &amp; Methods</p>
+    </div>
+    <div class="r-patent">
+      <div class="r-patent-header">
+        <span class="r-patent-num">US20230132855A1</span>
+      </div>
+      <p class="r-patent-title">Automated LiDAR Target Simulation Scanning Systems and Methods</p>
+    </div>
+  </section>
+
+  <section class="r-section">
     <h2 class="r-section-title">Skills</h2>
     <table class="r-skills">
       <tr>
@@ -326,22 +356,6 @@
         <span class="r-job-period">Mar 2021</span>
       </div>
       <p class="r-cert-issuer">DreamCatcher Consulting</p>
-    </div>
-  </section>
-
-  <section class="r-section">
-    <h2 class="r-section-title">Patents</h2>
-    <div class="r-patent">
-      <div class="r-patent-header">
-        <span class="r-patent-num">US20220260714A1</span>
-      </div>
-      <p class="r-patent-title">Automated LiDAR Target Simulation Scanning Systems &amp; Methods</p>
-    </div>
-    <div class="r-patent">
-      <div class="r-patent-header">
-        <span class="r-patent-num">US20230132855A1</span>
-      </div>
-      <p class="r-patent-title">Automated LiDAR Target Simulation Scanning Systems and Methods</p>
     </div>
   </section>
 
