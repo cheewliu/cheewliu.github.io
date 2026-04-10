@@ -293,11 +293,12 @@ section {
 }
 
 .hero-tagline {
-  font-size: 0.82rem;
-  color: var(--text-dim);
+  font-size: 1.15rem;
+  color: #e2e2f0;
   font-style: italic;
-  margin-bottom: 1.25rem;
-  opacity: 0.75;
+  margin: 1rem 0;
+  border-left: 2px solid var(--accent);
+  padding-left: 0.75rem;
 }
 
 .hero-location {
