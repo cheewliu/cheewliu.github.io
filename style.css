@@ -365,6 +365,32 @@ section {
 }
 
 /* =========================================================
+   PROFILE PHOTO
+   ========================================================= */
+.profile-photo-wrap {
+  margin-bottom: 1.5rem;
+}
+
+.profile-photo {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--accent);
+  box-shadow:
+    0 0 0 5px rgba(100, 255, 218, 0.08),
+    0 0 24px rgba(100, 255, 218, 0.18);
+  display: block;
+}
+
+@media (max-width: 750px) {
+  .profile-photo-wrap {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+/* =========================================================
    ABOUT + SKILLS
    ========================================================= */
 .about-grid {
