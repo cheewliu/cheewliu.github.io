@@ -99,14 +99,26 @@ async function fetchGitHubProjects() {
   } catch (_) {}
 
   try {
-    // Route through Cloudflare Worker to use GITHUB_TOKEN (5000 req/hr vs 60)
-    const res = await fetch(
-      `${CLAUDE_PROXY}/github?user=${GITHUB_USERNAME}&per_page=12`
-    );
-    if (!res.ok) throw new Error(`GitHub API ${res.status}`);
-    const repos = await res.json();
+    let repos = null;
 
-    // Cache for 10 minutes
+    // 1st attempt: Worker proxy (authenticated — 5000 req/hr)
+    try {
+      const res = await fetch(
+        `${CLAUDE_PROXY}/github?user=${GITHUB_USERNAME}&per_page=12`
+      );
+      if (res.ok) repos = await res.json();
+    } catch (_) {}
+
+    // 2nd attempt: Direct GitHub API (unauthenticated — 60 req/hr per IP)
+    if (!repos) {
+      const res = await fetch(
+        `https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=12&type=public`
+      );
+      if (!res.ok) throw new Error(`GitHub API ${res.status}`);
+      repos = await res.json();
+    }
+
+    // Cache successful result
     try {
       sessionStorage.setItem(GITHUB_CACHE_KEY, JSON.stringify({ ts: Date.now(), repos }));
     } catch (_) {}
