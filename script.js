@@ -52,18 +52,73 @@ function highlightActiveSection() {
 }
 
 /* =========================================================
-   SCROLL FADE-IN ANIMATION
+   DARK / LIGHT MODE TOGGLE
    ========================================================= */
+const themeToggle = document.getElementById('theme-toggle');
+
+function applyTheme(light) {
+  document.body.classList.toggle('light-mode', light);
+  themeToggle.textContent = light ? '☀' : '☾';
+}
+
+// Restore saved preference
+applyTheme(localStorage.getItem('theme') === 'light');
+
+themeToggle.addEventListener('click', () => {
+  const isLight = document.body.classList.toggle('light-mode');
+  themeToggle.textContent = isLight ? '☀' : '☾';
+  localStorage.setItem('theme', isLight ? 'light' : 'dark');
+});
+
+/* =========================================================
+   SCROLL ANIMATIONS
+   ========================================================= */
+// Fade-up: sections, cards, panels
 const fadeEls = document.querySelectorAll(
-  '.timeline-item, .project-card, .skill-category, .contact-card, .about-text, .resume-cta, .recruiter-tool'
+  '.timeline-item, .project-card, .skill-category, .contact-card, ' +
+  '.about-text, .resume-cta, .recruiter-tool, .certs-card, .patents-card'
 );
 fadeEls.forEach(el => el.classList.add('fade-in'));
 
-const observer = new IntersectionObserver(
-  entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
-  { threshold: 0.1 }
-);
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    // Stagger timeline items by their index
+    if (e.target.classList.contains('timeline-item')) {
+      const siblings = [...document.querySelectorAll('.timeline-item')];
+      const delay = siblings.indexOf(e.target) * 100;
+      setTimeout(() => e.target.classList.add('visible'), delay);
+    } else {
+      e.target.classList.add('visible');
+    }
+    observer.unobserve(e.target);
+  });
+}, { threshold: 0.08 });
+
 fadeEls.forEach(el => observer.observe(el));
+
+// Section headers slide in
+const headerObserver = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    e.target.classList.add('visible');
+    headerObserver.unobserve(e.target);
+  });
+}, { threshold: 0.2 });
+
+document.querySelectorAll('.section-header').forEach(el => headerObserver.observe(el));
+
+// Skill tags scale-pop with stagger
+const tagObserver = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    const tags = e.target.querySelectorAll('.tag');
+    tags.forEach((tag, i) => setTimeout(() => tag.classList.add('visible'), i * 40));
+    tagObserver.unobserve(e.target);
+  });
+}, { threshold: 0.2 });
+
+document.querySelectorAll('.skill-category, .timeline-tags').forEach(el => tagObserver.observe(el));
 
 /* =========================================================
    GITHUB PROJECTS — dynamic repo fetch
