@@ -1,0 +1,8 @@
+name            = "jacky-portfolio-proxy"
+main            = "src/index.js"
+compatibility_date = "2025-04-10"
+account_id      = "YOUR_CLOUDFLARE_ACCOUNT_ID"
+
+[[kv_namespaces]]
+binding = "RATE_LIMIT"
+id      = "YOUR_KV_NAMESPACE_ID"

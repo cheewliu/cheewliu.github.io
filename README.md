@@ -39,3 +39,5 @@ wrangler deploy
 ```
 
 Copy `config.example.js` → `config.js` if you need a local key for testing (gitignored).
+
+Copy `worker/wrangler.example.toml` → `worker/wrangler.toml` and fill in your Cloudflare `account_id` and KV namespace `id` before deploying the worker. `worker/wrangler.toml` is gitignored to keep credentials out of the repo.
