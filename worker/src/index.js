@@ -11,7 +11,7 @@ const ALLOWED_ORIGINS = [
   'https://www.cheewliu.github.io',
 ];
 
-const RATE_LIMIT_MAX    = 3;
+const RATE_LIMIT_MAX    = 20;
 const RATE_LIMIT_WINDOW = 60 * 60; // seconds
 
 export default {
