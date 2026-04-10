@@ -1148,6 +1148,13 @@ footer {
   .resume-cta-actions { flex-direction: row; width: 100%; }
 }
 
+.resume-last-updated {
+  margin-top: 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-dim);
+}
+
 /* =========================================================
    RECRUITER AI TOOL
    ========================================================= */
