@@ -380,7 +380,8 @@ section {
 
 /* AI Summary Card */
 .ai-summary {
-  margin-top: 1.75rem;
+  margin-top: 1.25rem;
+  margin-bottom: 1.5rem;
   background: #161923;
   border: 1px solid #252a3a;
   border-left: 3px solid #7c3aed;
