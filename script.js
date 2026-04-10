@@ -44,7 +44,7 @@ function highlightActiveSection() {
    SCROLL FADE-IN ANIMATION
    ========================================================= */
 const fadeEls = document.querySelectorAll(
-  '.timeline-item, .project-card, .skill-category, .contact-card, .about-text, .resume-document'
+  '.timeline-item, .project-card, .skill-category, .contact-card, .about-text, .resume-cta, .recruiter-tool'
 );
 fadeEls.forEach(el => el.classList.add('fade-in'));
 
@@ -412,21 +412,8 @@ function copyCoverLetter() {
 }
 
 /* =========================================================
-   RESUME — print-to-PDF download
+   RESUME — section highlight active for AI Match
    ========================================================= */
-function downloadResume() {
-  const btn = document.getElementById('download-resume');
-  btn.textContent = 'Preparing PDF...';
-  btn.disabled = true;
-
-  // Smooth: scroll to resume section, then print
-  document.getElementById('resume').scrollIntoView({ behavior: 'smooth' });
-  setTimeout(() => {
-    window.print();
-    btn.textContent = '↓ Download PDF';
-    btn.disabled = false;
-  }, 600);
-}
 
 /* =========================================================
    INIT

@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Liu Chee Wei (Jacky) — Resume</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --text:       #1a1a1a;
+      --muted:      #444;
+      --light:      #666;
+      --border:     #d4d4d4;
+      --accent:     #1a56db;
+      --bg:         #ffffff;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      font-size: 10pt;
+      line-height: 1.55;
+      color: var(--text);
+      background: var(--bg);
+      max-width: 210mm;
+      margin: 0 auto;
+      padding: 1.8cm 2cm;
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+
+    /* ── Header ── */
+    .r-header {
+      margin-bottom: 1.2em;
+      padding-bottom: 0.9em;
+      border-bottom: 2px solid var(--accent);
+    }
+
+    .r-name {
+      font-size: 20pt;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.3px;
+      margin-bottom: 0.15em;
+    }
+
+    .r-title {
+      font-size: 10.5pt;
+      color: var(--accent);
+      margin-bottom: 0.35em;
+    }
+
+    .r-contact {
+      font-size: 8.5pt;
+      color: var(--light);
+    }
+
+    .r-contact span { margin: 0 0.3em; }
+
+    /* ── Sections ── */
+    .r-section { margin-bottom: 1.1em; }
+
+    .r-section-title {
+      font-size: 7.5pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.2em;
+      margin-bottom: 0.6em;
+    }
+
+    .r-summary {
+      font-size: 9.5pt;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* ── Jobs ── */
+    .r-job { margin-bottom: 0.75em; }
+
+    .r-job-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1em;
+    }
+
+    .r-job-title {
+      font-size: 10pt;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .r-job-period {
+      font-size: 8.5pt;
+      color: var(--light);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .r-job-company {
+      font-size: 9pt;
+      color: var(--muted);
+      margin-bottom: 0.25em;
+    }
+
+    .r-bullets {
+      list-style: none;
+      padding-left: 0.9em;
+    }
+
+    .r-bullets li {
+      font-size: 9pt;
+      color: var(--muted);
+      position: relative;
+      padding-left: 0.75em;
+      margin-bottom: 0.12em;
+      line-height: 1.5;
+    }
+
+    .r-bullets li::before {
+      content: '•';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+    }
+
+    /* ── Skills table ── */
+    .r-skills {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 9pt;
+    }
+
+    .r-skills td {
+      padding: 0.15em 0;
+      vertical-align: top;
+      color: var(--muted);
+    }
+
+    .r-skills td:first-child {
+      font-weight: 600;
+      color: var(--text);
+      width: 22%;
+      padding-right: 1em;
+    }
+
+    /* ── Certifications / Patents ── */
+    .r-cert, .r-patent { margin-bottom: 0.45em; }
+
+    .r-cert-header, .r-patent-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      font-size: 9.5pt;
+    }
+
+    .r-cert-name, .r-patent-num {
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .r-patent-num {
+      font-family: 'Courier New', monospace;
+      color: var(--accent);
+      font-size: 8.5pt;
+    }
+
+    .r-cert-issuer, .r-patent-title {
+      font-size: 8.5pt;
+      color: var(--light);
+    }
+
+    /* ── Print ── */
+    @media print {
+      body { padding: 1cm 1.5cm; }
+
+      @page {
+        size: A4;
+        margin: 0;
+      }
+
+      a { color: var(--accent); }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="r-header">
+    <h1 class="r-name">Liu Chee Wei (Jacky)</h1>
+    <p class="r-title">R&D Software Lead Engineer &middot; EV/ADAS Test Automation &middot; OpenTAP/PTEM &middot; LiDAR</p>
+    <p class="r-contact">
+      Penang, Malaysia
+      <span>&middot;</span>
+      <a href="mailto:cheewei.1988@gmail.com">cheewei.1988@gmail.com</a>
+      <span>&middot;</span>
+      <a href="https://linkedin.com/in/jacky-liu-chee-wei">linkedin.com/in/jacky-liu-chee-wei</a>
+      <span>&middot;</span>
+      <a href="https://github.com/cheewliu">github.com/cheewliu</a>
+    </p>
+  </header>
+
+  <section class="r-section">
+    <h2 class="r-section-title">Summary</h2>
+    <p class="r-summary">
+      Software architect and lead engineer with 13+ years across automotive test automation, semiconductor equipment,
+      and entrepreneurship. At Keysight Technologies, led the architecture of PTEM on OpenTAP for global EV/ADAS
+      programs and co-invented two US-patented LiDAR simulation systems. Combines deep technical expertise in
+      C#, C++, and Python with Agile leadership and a systems-first approach to building purposeful tooling.
+    </p>
+  </section>
+
+  <section class="r-section">
+    <h2 class="r-section-title">Experience</h2>
+
+    <div class="r-job">
+      <div class="r-job-header">
+        <span class="r-job-title">R&D Software Lead Engineer</span>
+        <span class="r-job-period">Oct 2019 – Present</span>
+      </div>
+      <p class="r-job-company">Keysight Technologies Malaysia, Penang</p>
+      <ul class="r-bullets">
+        <li>Led architecture and development of PTEM built on OpenTAP for EV/ADAS test automation</li>
+        <li>Served as Scrum Master and established SQ release process for global automotive projects</li>
+        <li>Started as main developer for LiDAR Target Simulator (E8717A) — resulted in 2 US patents</li>
+      </ul>
+    </div>
+
+    <div class="r-job">
+      <div class="r-job-header">
+        <span class="r-job-title">Motion Control &amp; Software Dev Senior Engineer</span>
+        <span class="r-job-period">Apr 2016 – Sep 2019</span>
+      </div>
+      <p class="r-job-company">WAFTECH, Penang</p>
+      <ul class="r-bullets">
+        <li>Built next-gen machine control software using C# and WPF</li>
+        <li>Implemented SECS/GEM integration for semiconductor equipment communication</li>
+        <li>Led on-site deployments and mentored junior engineers</li>
+      </ul>
+    </div>
+
+    <div class="r-job">
+      <div class="r-job-header">
+        <span class="r-job-title">Co-Founder</span>
+        <span class="r-job-period">Apr 2011 – Mar 2016</span>
+      </div>
+      <p class="r-job-company">Makerzone Sdn Bhd, Penang</p>
+      <ul class="r-bullets">
+        <li>Founded a 3D printing service business from the ground up</li>
+        <li>Built and managed the company marketing website</li>
+        <li>Handled end-to-end customer projects from design to delivery</li>
+      </ul>
+    </div>
+
+    <div class="r-job">
+      <div class="r-job-header">
+        <span class="r-job-title">Machine Automation Software Engineer</span>
+        <span class="r-job-period">Oct 2014 – Apr 2015</span>
+      </div>
+      <p class="r-job-company">WAFTECH, Penang</p>
+      <ul class="r-bullets">
+        <li>Developed motion control and wafer handling software in C# and WPF</li>
+      </ul>
+    </div>
+
+    <div class="r-job">
+      <div class="r-job-header">
+        <span class="r-job-title">R&D System Engineer</span>
+        <span class="r-job-period">Jun 2011 – Oct 2014</span>
+      </div>
+      <p class="r-job-company">Keysight Technologies Malaysia, Penang</p>
+      <ul class="r-bullets">
+        <li>Developed automotive test systems using C++</li>
+        <li>Supported TS-5000 hardware handler library</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="r-section">
+    <h2 class="r-section-title">Skills</h2>
+    <table class="r-skills">
+      <tr>
+        <td>Languages</td>
+        <td>C#, WPF, C++, Python, JavaScript, PowerShell</td>
+      </tr>
+      <tr>
+        <td>Frameworks</td>
+        <td>OpenTAP, PTEM, .NET, Docker, Jenkins, Azure DevOps, Git</td>
+      </tr>
+      <tr>
+        <td>Domain</td>
+        <td>EV/ADAS, LiDAR, HIL Testing, SECS/GEM, Automotive SPICE, EV Manufacturing</td>
+      </tr>
+      <tr>
+        <td>Leadership</td>
+        <td>Scrum Master, Software Architecture, CI/CD, Agile</td>
+      </tr>
+    </table>
+  </section>
+
+  <section class="r-section">
+    <h2 class="r-section-title">Education</h2>
+    <div class="r-job">
+      <div class="r-job-header">
+        <span class="r-job-title">Bachelor of Engineering (Hons), Electrical &amp; Electronic Engineering</span>
+        <span class="r-job-period">2007 – 2011</span>
+      </div>
+      <p class="r-job-company">Universiti Tunku Abdul Rahman (UTAR), Malaysia</p>
+    </div>
+  </section>
+
+  <section class="r-section">
+    <h2 class="r-section-title">Certifications</h2>
+    <div class="r-cert">
+      <div class="r-cert-header">
+        <span class="r-cert-name">Agile SCRUM for Practitioners</span>
+        <span class="r-job-period">Feb 2026</span>
+      </div>
+      <p class="r-cert-issuer">DreamCatcher Consulting</p>
+    </div>
+    <div class="r-cert">
+      <div class="r-cert-header">
+        <span class="r-cert-name">Practical AI with Machine and Deep Learning</span>
+        <span class="r-job-period">Mar 2021</span>
+      </div>
+      <p class="r-cert-issuer">DreamCatcher Consulting</p>
+    </div>
+  </section>
+
+  <section class="r-section">
+    <h2 class="r-section-title">Patents</h2>
+    <div class="r-patent">
+      <div class="r-patent-header">
+        <span class="r-patent-num">US20220260714A1</span>
+      </div>
+      <p class="r-patent-title">Automated LiDAR Target Simulation Scanning Systems &amp; Methods</p>
+    </div>
+    <div class="r-patent">
+      <div class="r-patent-header">
+        <span class="r-patent-num">US20230132855A1</span>
+      </div>
+      <p class="r-patent-title">Automated LiDAR Target Simulation Scanning Systems and Methods</p>
+    </div>
+  </section>
+
+</body>
+</html>
