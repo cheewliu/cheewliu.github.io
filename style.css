@@ -52,6 +52,11 @@ body.light-mode #navbar {
   background: rgba(245, 246, 250, 0.88);
 }
 
+body.light-mode .hero-tagline {
+  color: #1a1a2e;
+  border-left-color: #1a56db;
+}
+
 html { scroll-behavior: smooth; }
 
 body {
