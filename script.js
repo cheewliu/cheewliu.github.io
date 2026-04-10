@@ -18,7 +18,18 @@ const navList    = document.querySelector('.nav-links');
 window.addEventListener('scroll', () => {
   navbar.classList.toggle('scrolled', window.scrollY > 20);
   highlightActiveSection();
+  updateFab();
 });
+
+function updateFab() {
+  const fab     = document.getElementById('fab-match');
+  const section = document.getElementById('ai-match');
+  if (!fab || !section) return;
+  const rect = section.getBoundingClientRect();
+  // Hide when ai-match is visible in the viewport
+  const inView = rect.top < window.innerHeight && rect.bottom > 0;
+  fab.classList.toggle('hidden', inView);
+}
 
 hamburger.addEventListener('click', () => {
   navList.classList.toggle('open');
@@ -423,6 +434,7 @@ document.addEventListener('DOMContentLoaded', () => {
   loadAISummary();
   highlightActiveSection();
   updateRateDisplay();
+  updateFab();
 
   const ta      = document.getElementById('jd-input');
   const counter = document.getElementById('jd-counter');
