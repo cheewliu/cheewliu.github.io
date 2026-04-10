@@ -68,6 +68,9 @@ fadeEls.forEach(el => observer.observe(el));
 /* =========================================================
    GITHUB PROJECTS — dynamic repo fetch
    ========================================================= */
+const GITHUB_CACHE_KEY = 'gh_repos_v1';
+const GITHUB_CACHE_TTL = 10 * 60 * 1000; // 10 minutes
+
 async function fetchGitHubProjects() {
   const grid    = document.getElementById('projects-grid');
   const loading = document.getElementById('projects-loading');
@@ -86,48 +89,65 @@ async function fetchGitHubProjects() {
     return;
   }
 
+  // Return cached repos if still fresh
   try {
+    const cached = JSON.parse(sessionStorage.getItem(GITHUB_CACHE_KEY) || 'null');
+    if (cached && Date.now() - cached.ts < GITHUB_CACHE_TTL) {
+      renderRepos(cached.repos, grid, loading);
+      return;
+    }
+  } catch (_) {}
+
+  try {
+    // Route through Cloudflare Worker to use GITHUB_TOKEN (5000 req/hr vs 60)
     const res = await fetch(
-      `https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=12&type=public`
+      `${CLAUDE_PROXY}/github?user=${GITHUB_USERNAME}&per_page=12`
     );
     if (!res.ok) throw new Error(`GitHub API ${res.status}`);
     const repos = await res.json();
 
-    loading.remove();
+    // Cache for 10 minutes
+    try {
+      sessionStorage.setItem(GITHUB_CACHE_KEY, JSON.stringify({ ts: Date.now(), repos }));
+    } catch (_) {}
 
-    if (!repos.length) {
-      grid.innerHTML = `<p class="projects-loading">No public repositories found.</p>`;
-      return;
-    }
-
-    repos.forEach(repo => {
-      const card = document.createElement('a');
-      card.className  = 'project-card fade-in';
-      card.href       = repo.html_url;
-      card.target     = '_blank';
-      card.rel        = 'noopener';
-      card.innerHTML  = `
-        <div class="project-card-header">
-          <span class="project-icon">&#128193;</span>
-          <span class="project-name">${escHtml(repo.name)}</span>
-        </div>
-        <p class="project-desc">${escHtml(repo.description || 'No description.')}</p>
-        <div class="project-footer">
-          ${repo.language ? `<span class="project-lang">${escHtml(repo.language)}</span>` : ''}
-          <span>&#9733; ${repo.stargazers_count}</span>
-          <span>&#8508; ${repo.forks_count}</span>
-        </div>
-      `;
-      grid.appendChild(card);
-      observer.observe(card);
-      setTimeout(() => card.classList.add('visible'), 50);
-    });
+    renderRepos(repos, grid, loading);
 
   } catch (err) {
     console.error('GitHub fetch error:', err);
     loading.remove();
     errorEl.classList.remove('hidden');
   }
+}
+
+function renderRepos(repos, grid, loading) {
+  loading.remove();
+  if (!repos.length) {
+    grid.innerHTML = `<p class="projects-loading">No public repositories found.</p>`;
+    return;
+  }
+  repos.forEach(repo => {
+    const card = document.createElement('a');
+    card.className = 'project-card fade-in';
+    card.href      = repo.html_url;
+    card.target    = '_blank';
+    card.rel       = 'noopener';
+    card.innerHTML = `
+      <div class="project-card-header">
+        <span class="project-icon">&#128193;</span>
+        <span class="project-name">${escHtml(repo.name)}</span>
+      </div>
+      <p class="project-desc">${escHtml(repo.description || 'No description.')}</p>
+      <div class="project-footer">
+        ${repo.language ? `<span class="project-lang">${escHtml(repo.language)}</span>` : ''}
+        <span>&#9733; ${repo.stargazers_count}</span>
+        <span>&#8508; ${repo.forks_count}</span>
+      </div>
+    `;
+    grid.appendChild(card);
+    observer.observe(card);
+    setTimeout(() => card.classList.add('visible'), 50);
+  });
 }
 
 function escHtml(str) {

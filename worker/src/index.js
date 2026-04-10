@@ -1,9 +1,13 @@
 /**
- * Cloudflare Worker — Anthropic API proxy for cheewliu.github.io
+ * Cloudflare Worker — API proxy for cheewliu.github.io
  *
- * - Injects ANTHROPIC_API_KEY from Cloudflare secret (never in code)
+ * Routes:
+ *   GET  /github  — GitHub public repos proxy (uses GITHUB_TOKEN secret)
+ *   POST /        — Anthropic Claude API proxy (uses ANTHROPIC_API_KEY secret)
+ *
+ * - Injects secrets from Cloudflare (never exposed to the browser)
  * - Enforces CORS (portfolio domain + localhost dev)
- * - Rate limits: 3 requests per IP per hour via KV
+ * - Rate limits Claude calls: 20 requests per IP per hour via KV
  */
 
 const ALLOWED_ORIGINS = [
@@ -17,8 +21,8 @@ const RATE_LIMIT_WINDOW = 60 * 60; // seconds
 export default {
   async fetch(request, env) {
     const origin = request.headers.get('Origin') || '';
+    const url    = new URL(request.url);
 
-    // Allow localhost in dev (any port)
     const isAllowed =
       ALLOWED_ORIGINS.includes(origin) ||
       /^http:\/\/localhost(:\d+)?$/.test(origin);
@@ -28,12 +32,43 @@ export default {
       return buildResponse(null, 204, isAllowed ? origin : null);
     }
 
-    if (request.method !== 'POST') {
-      return buildResponse(JSON.stringify({ error: 'Method not allowed' }), 405, isAllowed ? origin : null);
-    }
-
     if (!isAllowed) {
       return buildResponse(JSON.stringify({ error: 'Forbidden' }), 403, null);
+    }
+
+    // ── GET /github — GitHub repos proxy ──────────────────────────────────
+    if (request.method === 'GET' && url.pathname === '/github') {
+      try {
+        const username = url.searchParams.get('user') || 'cheewliu';
+        const perPage  = url.searchParams.get('per_page') || '12';
+
+        const headers = {
+          'Accept':     'application/vnd.github+json',
+          'User-Agent': 'cheewliu-portfolio-worker',
+        };
+        if (env.GITHUB_TOKEN) {
+          headers['Authorization'] = `Bearer ${env.GITHUB_TOKEN}`;
+        }
+
+        const ghRes  = await fetch(
+          `https://api.github.com/users/${username}/repos?sort=updated&per_page=${perPage}&type=public`,
+          { headers }
+        );
+        const text = await ghRes.text();
+        return buildResponse(text, ghRes.status, origin);
+
+      } catch (err) {
+        return buildResponse(
+          JSON.stringify({ error: 'GitHub proxy error', detail: err.message }),
+          502,
+          origin
+        );
+      }
+    }
+
+    // ── POST / — Anthropic Claude proxy ───────────────────────────────────
+    if (request.method !== 'POST') {
+      return buildResponse(JSON.stringify({ error: 'Method not allowed' }), 405, origin);
     }
 
     // Rate limiting via KV
@@ -48,7 +83,7 @@ export default {
 
     if (requests.length >= RATE_LIMIT_MAX) {
       return buildResponse(
-        JSON.stringify({ error: 'Rate limit exceeded — max 3 requests per hour.' }),
+        JSON.stringify({ error: 'Rate limit exceeded — max 20 requests per hour.' }),
         429,
         origin
       );
@@ -59,7 +94,7 @@ export default {
       expirationTtl: RATE_LIMIT_WINDOW,
     });
 
-    // Proxy to Anthropic — API key injected from secret, never exposed
+    // Proxy to Anthropic
     try {
       const body = await request.text();
 
@@ -89,7 +124,7 @@ export default {
 function buildResponse(body, status, origin) {
   const headers = {
     'Content-Type':                 'application/json',
-    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
     'Access-Control-Allow-Headers': 'Content-Type',
     'Access-Control-Max-Age':       '86400',
   };
