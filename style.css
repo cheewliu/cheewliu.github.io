@@ -882,6 +882,80 @@ footer {
 }
 
 /* =========================================================
+   PATENTS CARD
+   ========================================================= */
+.patents-card {
+  margin-top: 2.5rem;
+  background: #110e00;
+  border: 1px solid #78350f44;
+  border-left: 3px solid #f59e0b;
+  border-radius: 6px;
+  padding: 1.25rem 1.5rem;
+}
+
+.patents-header {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-bottom: 1rem;
+}
+
+.patents-icon {
+  font-size: 1rem;
+  color: #f59e0b;
+}
+
+.patents-header h4 {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #fbbf24;
+  letter-spacing: 0.03em;
+  flex: 1;
+}
+
+.patents-badge {
+  font-family: var(--font-mono);
+  font-size: 0.67rem;
+  color: #f59e0b;
+  background: #78350f33;
+  border: 1px solid #92400e66;
+  padding: 2px 9px;
+  border-radius: 20px;
+  letter-spacing: 0.07em;
+}
+
+.patents-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.patent-item {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  text-decoration: none;
+  color: inherit;
+  transition: opacity 0.2s;
+}
+
+.patent-item:hover { opacity: 0.75; }
+
+.patent-num {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: #f59e0b;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.patent-title {
+  font-size: 0.83rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+/* =========================================================
    RECRUITER AI TOOL
    ========================================================= */
 .recruiter-tool {

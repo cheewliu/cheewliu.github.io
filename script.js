@@ -1,7 +1,7 @@
 /* =========================================================
    CONFIG — update these before going live
    ========================================================= */
-const GITHUB_USERNAME = 'GITHUB_USERNAME';
+const GITHUB_USERNAME = 'cheewliu';
 
 // Cloudflare Worker proxy — API key lives in Cloudflare secrets, never here
 const CLAUDE_PROXY = 'https://jacky-portfolio-proxy.cheewei-1988.workers.dev';
@@ -200,28 +200,51 @@ Rules: third person, specific about tech and domain, under 65 words, no filler p
 /* =========================================================
    RECRUITER AI TOOL
    ========================================================= */
-const RESUME_TEXT = `Liu Chee Wei (Jacky) | R&D Software Architect | Penang, Malaysia
-linkedin.com/in/jacky-liu-chee-wei
+const RESUME_TEXT = `Liu Chee Wei (Jacky) | R&D Software Lead Engineer | Penang, Malaysia
+linkedin.com/in/jacky-liu-chee-wei | github.com/cheewliu | cheewei.1988@gmail.com
 
 SUMMARY
-Software architect with deep expertise in automotive test automation, specializing in EV and ADAS systems. Designs and implements scalable test frameworks using OpenTAP and PTEM across cross-functional R&D teams.
+Software architect and lead engineer with 13+ years across automotive test automation, semiconductor equipment, and entrepreneurship. At Keysight Technologies, led the architecture of PTEM on OpenTAP for global EV/ADAS programs and co-invented two US-patented LiDAR simulation systems.
 
 SKILLS
 Languages: C#, WPF, C++, Python, JavaScript, PowerShell
 Frameworks & Tools: OpenTAP, PTEM, .NET, Docker, Jenkins, Azure DevOps, Git
-Domain: EV/ADAS, HIL Testing, CAN/LIN, SECS/GEM, LiDAR, Automotive SPICE, EV Manufacturing Testing
-Architecture: Test Automation, Software Architecture, CI/CD, Agile, Scrum, Microservices, REST APIs
+Domain: EV/ADAS, LiDAR, HIL Testing, SECS/GEM, Automotive SPICE, EV Manufacturing Testing
+Leadership: Scrum Master, Software Architecture, CI/CD, Agile
 
 EXPERIENCE
-R&D Software Architect | Penang, Malaysia | [Current Role]
-- Architected test automation frameworks for EV/ADAS validation using OpenTAP and PTEM
-- Led CI/CD pipeline adoption integrated with hardware-in-the-loop test environments
-- Defined cross-program tooling standards and best practices adopted across multiple automotive programs
+R&D Software Lead Engineer | Keysight Technologies Malaysia | Oct 2019 – Present
+- Led architecture and development of PTEM built on OpenTAP for EV/ADAS test automation
+- Served as Scrum Master and established SQ release process for global automotive projects
+- Started as main developer for LiDAR Target Simulator (E8717A) — resulted in 2 US patents
 
-Senior Test Automation Engineer | Penang, Malaysia | [Previous Role]
-- Developed ECU validation test suites with CAN/LIN protocol support
-- Reduced regression cycle time via parallel test execution strategies
-- Implemented automotive-grade test reporting and traceability systems`;
+Motion Control & Software Dev Senior Engineer | WAFTECH | Apr 2016 – Sep 2019
+- Built next-gen machine control software using C# and WPF
+- Implemented SECS/GEM integration for semiconductor equipment communication
+- Led on-site deployments and mentored junior engineers
+
+Co-Founder | Makerzone Sdn Bhd | Apr 2011 – Mar 2016
+- Founded a 3D printing service business from the ground up
+- Built and managed the company marketing website
+
+Machine Automation Software Engineer | WAFTECH | Oct 2014 – Apr 2015
+- Developed motion control and wafer handling software in C# and WPF
+
+R&D System Engineer | Keysight Technologies Malaysia | Jun 2011 – Oct 2014
+- Developed automotive test systems using C++
+- Supported TS-5000 hardware handler library
+
+EDUCATION
+Bachelor of Engineering (Hons), Electrical & Electronic Engineering
+Universiti Tunku Abdul Rahman (UTAR), 2007 – 2011
+
+CERTIFICATIONS
+Agile SCRUM for Practitioners — DreamCatcher Consulting, Feb 2026
+Practical AI with Machine and Deep Learning — DreamCatcher Consulting, Mar 2021
+
+PATENTS
+US20220260714A1 — Automated LiDAR Target Simulation Scanning Systems & Methods
+US20230132855A1 — Automated LiDAR Target Simulation Scanning Systems and Methods`;
 
 const MAX_ANALYSES = 3;
 const RATE_KEY     = 'recruiter_uses';
