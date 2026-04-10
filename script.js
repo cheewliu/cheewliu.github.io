@@ -3,7 +3,8 @@
    ========================================================= */
 const GITHUB_USERNAME = 'GITHUB_USERNAME';
 
-// ANTHROPIC_API_KEY is loaded from config.js (excluded from git via .gitignore)
+// Cloudflare Worker proxy — API key lives in Cloudflare secrets, never here
+const CLAUDE_PROXY = 'https://jacky-portfolio-proxy.cheewei-1988.workers.dev';
 const CLAUDE_MODEL = 'claude-sonnet-4-20250514';
 
 /* =========================================================
@@ -160,12 +161,6 @@ async function loadAISummary() {
   const bodyEl = document.getElementById('ai-summary-body');
   const CACHE_KEY = 'ai_summary_v1';
 
-  // No key configured — hide the block silently
-  if (typeof ANTHROPIC_API_KEY === 'undefined' || ANTHROPIC_API_KEY === 'your-key-here') {
-    block.style.display = 'none';
-    return;
-  }
-
   // Serve from cache — still run typewriter so it feels consistent
   const cached = sessionStorage.getItem(CACHE_KEY);
   if (cached) {
@@ -179,14 +174,9 @@ Tech stack: C#, WPF, C++, OpenTAP, PTEM, Python, SECS/GEM, Test Automation, Soft
 Rules: third person, specific about tech and domain, under 65 words, no filler phrases.`;
 
   try {
-    const res = await fetch('https://api.anthropic.com/v1/messages', {
+    const res = await fetch(CLAUDE_PROXY, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': ANTHROPIC_API_KEY,
-        'anthropic-version': '2023-06-01',
-        'anthropic-dangerous-direct-browser-access': 'true',
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         model: CLAUDE_MODEL,
         max_tokens: 150,
@@ -301,14 +291,9 @@ Gaps: be honest but constructive, max 2 items.
 Cover letter: address a specific role requirement in the opening, reference exact tech from both JD and resume.`;
 
   try {
-    const res = await fetch('https://api.anthropic.com/v1/messages', {
+    const res = await fetch(CLAUDE_PROXY, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': ANTHROPIC_API_KEY,
-        'anthropic-version': '2023-06-01',
-        'anthropic-dangerous-direct-browser-access': 'true',
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         model: CLAUDE_MODEL,
         max_tokens: 1500,
