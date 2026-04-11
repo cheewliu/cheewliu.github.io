@@ -15,8 +15,9 @@ const ALLOWED_ORIGINS = [
   'https://www.cheewliu.github.io',
 ];
 
-const RATE_LIMIT_MAX    = 20;
-const RATE_LIMIT_WINDOW = 60 * 60; // seconds
+const RATE_LIMIT_MAX    = 50;        // raised: 50 Claude calls/IP/hour
+const RATE_LIMIT_WINDOW = 60 * 60;  // seconds
+const MAX_BODY_BYTES    = 16_000;   // ~16 KB max request body
 
 export default {
   async fetch(request, env) {
@@ -39,8 +40,9 @@ export default {
     // ── GET /github — GitHub repos proxy ──────────────────────────────────
     if (request.method === 'GET' && url.pathname === '/github') {
       try {
-        const username = url.searchParams.get('user') || 'cheewliu';
-        const perPage  = url.searchParams.get('per_page') || '12';
+        // Lock to portfolio owner only — don't allow proxying arbitrary users
+        const username = 'cheewliu';
+        const perPage  = Math.min(parseInt(url.searchParams.get('per_page') || '12'), 30);
 
         const headers = {
           'Accept':     'application/vnd.github+json',
@@ -96,7 +98,15 @@ export default {
 
     // Proxy to Anthropic
     try {
+      // Reject oversized bodies
+      const contentLength = parseInt(request.headers.get('Content-Length') || '0');
+      if (contentLength > MAX_BODY_BYTES) {
+        return buildResponse(JSON.stringify({ error: 'Request too large.' }), 413, origin);
+      }
       const body = await request.text();
+      if (body.length > MAX_BODY_BYTES) {
+        return buildResponse(JSON.stringify({ error: 'Request too large.' }), 413, origin);
+      }
 
       const upstream = await fetch('https://api.anthropic.com/v1/messages', {
         method: 'POST',
