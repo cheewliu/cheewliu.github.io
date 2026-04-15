@@ -81,6 +81,7 @@ body::before {
   opacity: 0.35;
   pointer-events: none;
   z-index: 0;
+  will-change: transform;
 }
 
 /* Radial glow overlay */
@@ -208,21 +209,8 @@ body.light-mode .nav-theme-toggle {
   border-radius: 4px;
 }
 
-/* Mobile nav */
+/* Mobile nav — base rules (animation handled at end of file) */
 @media (max-width: 700px) {
-  .nav-links {
-    display: none;
-    flex-direction: column;
-    position: absolute;
-    top: var(--nav-height);
-    left: 0;
-    right: 0;
-    background: var(--bg-card);
-    border-bottom: 1px solid var(--border);
-    padding: 1rem 2rem;
-    gap: 1rem;
-  }
-  .nav-links.open { display: flex; }
   .nav-hamburger { display: block; }
 }
 
@@ -1587,4 +1575,93 @@ footer {
 .section-header.visible {
   opacity: 1;
   transform: translateX(0);
+}
+
+/* =========================================================
+   SKIP LINK — screen readers / keyboard users
+   ========================================================= */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 1rem;
+  z-index: 9999;
+  background: var(--accent);
+  color: var(--bg);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0 0 4px 4px;
+  text-decoration: none;
+  transition: top 0.2s;
+}
+.skip-link:focus {
+  top: 0;
+}
+
+/* =========================================================
+   FOCUS VISIBLE — keyboard navigation outlines
+   ========================================================= */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* =========================================================
+   INLINE TEXT BUTTON (retry, etc.)
+   ========================================================= */
+.btn-text-link {
+  background: none;
+  border: none;
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: inherit;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+}
+.btn-text-link:hover { opacity: 0.75; }
+
+/* =========================================================
+   MOBILE NAV — animated open/close
+   ========================================================= */
+@media (max-width: 700px) {
+  .nav-links {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.28s ease, padding 0.28s ease;
+    display: flex !important;
+    flex-direction: column;
+    position: absolute;
+    top: var(--nav-height);
+    left: 0;
+    right: 0;
+    background: var(--bg-card);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    gap: 1rem;
+  }
+  .nav-links.open {
+    max-height: 320px;
+    padding: 1rem 2rem;
+  }
+}
+
+/* =========================================================
+   PREFERS-REDUCED-MOTION
+   ========================================================= */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  html { scroll-behavior: auto; }
+  .fade-in,
+  .section-header,
+  .tag {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
 }

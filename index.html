@@ -28,6 +28,7 @@
   <meta name="keywords" content="Liu Chee Wei, Jacky Liu, EV ADAS test automation, OpenTAP, PTEM, LiDAR, Keysight Technologies, R&D software lead engineer, Penang Malaysia, C#, C++, Python, JavaScript, automotive test automation, ADAS testing engineer, HIL testing, test automation engineer Malaysia, software architect, CI/CD, AI tooling, prompt engineering, US patent inventor, Scrum Master" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="canonical" href="https://cheewliu.github.io/" />
+  <link rel="preconnect" href="https://jacky-portfolio-proxy.cheewei-1988.workers.dev" />
   <link rel="stylesheet" href="style.css" />
   <script type="application/ld+json">
   {
@@ -65,6 +66,9 @@
   </script>
 </head>
 <body>
+
+  <!-- Skip navigation for keyboard/screen reader users -->
+  <a href="#hero" class="skip-link">Skip to main content</a>
 
   <!-- NAVBAR -->
   <nav id="navbar">
@@ -127,7 +131,7 @@
     <div class="about-grid">
       <div class="about-text">
         <div class="profile-photo-wrap">
-          <img src="assets/profile.jpg" alt="Liu Chee Wei (Jacky) — R&D Software Lead Engineer at Keysight Technologies, Penang" class="profile-photo" />
+          <img src="assets/profile.jpg" alt="Jacky Liu, R&D Software Lead Engineer" class="profile-photo" width="180" height="180" fetchpriority="high" decoding="async" />
         </div>
         <p>
           Software architect and lead engineer with 13+ years across automotive test automation, semiconductor equipment,
@@ -395,7 +399,9 @@
       </div>
     </div>
     <div class="projects-error hidden" id="projects-error">
-      <span class="accent">!</span> Could not load repositories. <a href="https://github.com/cheewliu" target="_blank" rel="noopener">View on GitHub</a>
+      <span class="accent">!</span> Could not load repositories.
+      <button class="btn-text-link" onclick="retryGitHub()">Retry</button>
+      &mdash; or <a href="https://github.com/cheewliu" target="_blank" rel="noopener">View on GitHub</a>
     </div>
   </section>
 
@@ -447,6 +453,7 @@
           placeholder="Paste a job description here..."
           maxlength="3000"
           rows="6"
+          aria-label="Job description — paste here to analyze fit"
         ></textarea>
         <div class="jd-meta">
           <span id="jd-counter" class="jd-counter">0 / 3000</span>
@@ -469,11 +476,11 @@
           <h4 class="result-panel-title">Resume Match</h4>
           <div class="score-wrap">
             <div class="score-ring-container">
-              <svg class="score-ring" viewBox="0 0 100 100" aria-hidden="true">
+              <svg class="score-ring" viewBox="0 0 100 100" role="img" aria-label="Match score">
                 <circle class="score-ring-track" cx="50" cy="50" r="42"/>
                 <circle class="score-ring-fill" id="score-ring-fill" cx="50" cy="50" r="42"/>
               </svg>
-              <div class="score-overlay">
+              <div class="score-overlay" aria-live="polite">
                 <span class="score-number" id="score-number">0</span>
                 <span class="score-unit">%</span>
               </div>
@@ -568,7 +575,7 @@
   </footer>
 
   <!-- Floating AI Match CTA -->
-  <a href="#ai-match" class="fab-match" id="fab-match">&#9889; Match My CV</a>
+  <a href="#ai-match" class="fab-match" id="fab-match" aria-label="Jump to AI Match CV tool">&#9889; Match My CV</a>
 
   <script src="script.js"></script>
 </body>

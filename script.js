@@ -19,7 +19,7 @@ window.addEventListener('scroll', () => {
   navbar.classList.toggle('scrolled', window.scrollY > 20);
   highlightActiveSection();
   updateFab();
-});
+}, { passive: true });
 
 function updateFab() {
   const fab     = document.getElementById('fab-match');
@@ -187,6 +187,20 @@ async function fetchGitHubProjects() {
   }
 }
 
+function retryGitHub() {
+  const errorEl = document.getElementById('projects-error');
+  const grid    = document.getElementById('projects-grid');
+  errorEl.classList.add('hidden');
+  // Re-inject loading placeholder then fetch
+  grid.innerHTML = `
+    <div class="projects-loading" id="projects-loading">
+      <span class="accent monospace">$ git fetch --all</span><br />
+      <span class="t-output">Loading repositories...</span>
+    </div>`;
+  sessionStorage.removeItem(GITHUB_CACHE_KEY);
+  fetchGitHubProjects();
+}
+
 function renderRepos(repos, grid, loading) {
   loading.remove();
   if (!repos.length) {
@@ -259,10 +273,10 @@ async function loadAISummary() {
   const bodyEl = document.getElementById('ai-summary-body');
   const CACHE_KEY = 'ai_summary_v1';
 
-  // Serve from cache — still run typewriter so it feels consistent
+  // Serve from cache — render immediately, no typewriter delay on repeat visits
   const cached = sessionStorage.getItem(CACHE_KEY);
   if (cached) {
-    await typewriter(bodyEl, cached);
+    bodyEl.textContent = cached;
     return;
   }
 
@@ -355,9 +369,7 @@ function updateRateDisplay() {
   const el        = document.getElementById('jd-rate-display');
   const btn       = document.getElementById('analyze-btn');
   if (el) {
-    el.textContent = remaining > 0
-      ? `${remaining} analys${remaining === 1 ? 'is' : 'es'} remaining this session`
-      : 'Session limit reached';
+    el.textContent = `${remaining} / ${MAX_ANALYSES} analyses remaining this session`;
     el.classList.toggle('depleted', remaining === 0);
   }
   if (btn && uses >= MAX_ANALYSES) {
@@ -498,14 +510,21 @@ function renderCoverLetter(text) {
 }
 
 function copyCoverLetter() {
-  const text = document.getElementById('cover-letter-body').innerText.trim();
+  const el   = document.getElementById('cover-letter-body');
+  const text = el.innerText.trim();
   const btn  = document.getElementById('copy-btn');
   navigator.clipboard.writeText(text).then(() => {
     btn.textContent = 'Copied!';
     setTimeout(() => { btn.textContent = 'Copy'; }, 2000);
   }).catch(() => {
-    btn.textContent = 'Failed';
-    setTimeout(() => { btn.textContent = 'Copy'; }, 2000);
+    // Fallback: select the text so user can Ctrl+C
+    const range = document.createRange();
+    range.selectNodeContents(el);
+    const sel = window.getSelection();
+    sel.removeAllRanges();
+    sel.addRange(range);
+    btn.textContent = 'Selected — press Ctrl+C';
+    setTimeout(() => { btn.textContent = 'Copy'; sel.removeAllRanges(); }, 3000);
   });
 }
 
