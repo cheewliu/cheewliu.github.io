@@ -328,7 +328,7 @@ EXPERIENCE
 R&D Software Lead Engineer | Keysight Technologies Malaysia | Oct 2019 – Present
 - Lead a team of 10 engineers on PTEM architecture and development, built on OpenTAP for global EV/ADAS test automation programs
 - Serve as Scrum Master; established SQ release process across global automotive programs
-- Started as sole developer on LiDAR Target Simulator; co-invented 2 US patents within 2 years; grew to a 4-engineer team and productized as Keysight E8717A
+- Main developer on the LiDAR Target Simulator project; co-invented 2 US patents within 2 years as part of a 4-engineer team; productized as Keysight E8717A
 
 Motion Control & Software Dev Senior Engineer | WAFTECH | Apr 2016 – Sep 2019
 - Built next-gen machine control software using C# and WPF
