@@ -1254,7 +1254,12 @@ footer {
   outline: none;
 }
 
-.jd-textarea:focus   { border-color: #7c3aed; }
+.jd-textarea:focus,
+.jd-textarea:focus-visible {
+  border-color: #7c3aed;
+  outline: none;
+  box-shadow: none;
+}
 .jd-textarea::placeholder { color: var(--text-dim); }
 
 .jd-meta {
