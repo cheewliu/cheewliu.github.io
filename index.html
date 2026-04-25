@@ -16,6 +16,12 @@
   <meta property="og:image:alt" content="Liu Chee Wei (Jacky) — R&D Software Lead Engineer" />
   <meta property="og:image:type" content="image/jpeg" />
   <meta property="og:locale" content="en_US" />
+  <meta property="og:site_name" content="Liu Chee Wei (Jacky) — Portfolio" />
+  <meta property="profile:first_name" content="Chee Wei" />
+  <meta property="profile:last_name" content="Liu" />
+  <meta property="profile:username" content="cheewliu" />
+  <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
   <!-- Twitter / X -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Liu Chee Wei (Jacky) — R&D Software Lead Engineer" />
@@ -33,34 +39,72 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Liu Chee Wei",
-    "alternateName": "Jacky Liu",
-    "jobTitle": "R&D Software Lead Engineer",
-    "description": "R&D Software Lead Engineer at Keysight Technologies with 13+ years in EV/ADAS test automation, OpenTAP/PTEM, and LiDAR systems. Co-inventor of 2 US patents. Based in Penang, Malaysia.",
-    "url": "https://cheewliu.github.io/",
-    "image": "https://cheewliu.github.io/assets/profile.jpg",
-    "email": "cheewei.1988@gmail.com",
-    "address": { "@type": "PostalAddress", "addressLocality": "Penang", "addressCountry": "MY" },
-    "worksFor": { "@type": "Organization", "name": "Keysight Technologies" },
-    "alumniOf": { "@type": "EducationalOrganization", "name": "Universiti Tunku Abdul Rahman (UTAR)" },
-    "sameAs": [
-      "https://www.linkedin.com/in/jacky-liu-chee-wei",
-      "https://github.com/cheewliu"
-    ],
-    "knowsAbout": [
-      "EV/ADAS Test Automation", "OpenTAP", "PTEM", "LiDAR", "HIL Testing",
-      "C#", "C++", "Python", "JavaScript", "Software Architecture",
-      "Automotive SPICE", "CAN/LIN", "SECS/GEM", "Scrum", "CI/CD",
-      "AI Tooling", "Prompt Engineering", "Cloudflare Workers"
-    ],
-    "hasCredential": [
-      { "@type": "EducationalOccupationalCredential", "name": "Agile SCRUM for Practitioners" },
-      { "@type": "EducationalOccupationalCredential", "name": "Practical AI with Machine and Deep Learning" }
-    ],
-    "award": [
-      "US Patent US20220260714A1 — Automated LiDAR Target Simulation Scanning Systems & Methods",
-      "US Patent US20230132855A1 — Automated LiDAR Target Simulation Scanning Systems and Methods"
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": "https://cheewliu.github.io/#person",
+        "name": "Liu Chee Wei",
+        "alternateName": "Jacky Liu",
+        "jobTitle": "R&D Software Lead Engineer",
+        "description": "R&D Software Lead Engineer at Keysight Technologies with 13+ years in EV/ADAS test automation, OpenTAP/PTEM, and LiDAR systems. Co-inventor of 2 US patents. Based in Penang, Malaysia.",
+        "url": "https://cheewliu.github.io/",
+        "image": "https://cheewliu.github.io/assets/profile.jpg",
+        "email": "cheewei.1988@gmail.com",
+        "nationality": { "@type": "Country", "name": "Malaysia" },
+        "address": { "@type": "PostalAddress", "addressLocality": "Penang", "addressCountry": "MY" },
+        "worksFor": { "@type": "Organization", "name": "Keysight Technologies", "url": "https://www.keysight.com" },
+        "alumniOf": { "@type": "EducationalOrganization", "name": "Universiti Tunku Abdul Rahman (UTAR)", "url": "https://utar.edu.my" },
+        "sameAs": [
+          "https://www.linkedin.com/in/jacky-liu-chee-wei",
+          "https://github.com/cheewliu"
+        ],
+        "knowsLanguage": [
+          { "@type": "Language", "name": "Chinese", "alternateName": "zh" },
+          { "@type": "Language", "name": "English", "alternateName": "en" },
+          { "@type": "Language", "name": "Malay", "alternateName": "ms" }
+        ],
+        "knowsAbout": [
+          "EV/ADAS Test Automation", "OpenTAP", "PTEM", "LiDAR", "HIL Testing",
+          "C#", "C++", "Python", "JavaScript", "Software Architecture",
+          "Automotive SPICE", "CAN/LIN", "SECS/GEM", "Scrum", "CI/CD",
+          "AI Tooling", "Prompt Engineering", "Cloudflare Workers"
+        ],
+        "hasCredential": [
+          { "@type": "EducationalOccupationalCredential", "name": "Agile SCRUM for Practitioners", "credentialCategory": "Certification", "recognizedBy": { "@type": "Organization", "name": "DreamCatcher Consulting" } },
+          { "@type": "EducationalOccupationalCredential", "name": "Practical AI with Machine and Deep Learning", "credentialCategory": "Certification", "recognizedBy": { "@type": "Organization", "name": "DreamCatcher Consulting" } }
+        ],
+        "award": [
+          "US Patent US20220260714A1 — Automated LiDAR Target Simulation Scanning Systems & Methods",
+          "US Patent US20230132855A1 — Automated LiDAR Target Simulation Scanning Systems and Methods"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://cheewliu.github.io/#website",
+        "url": "https://cheewliu.github.io/",
+        "name": "Liu Chee Wei (Jacky) — Portfolio",
+        "description": "Portfolio of Liu Chee Wei (Jacky), R&D Software Lead Engineer at Keysight Technologies",
+        "inLanguage": "en",
+        "publisher": { "@id": "https://cheewliu.github.io/#person" }
+      },
+      {
+        "@type": "ProfilePage",
+        "@id": "https://cheewliu.github.io/#profilepage",
+        "url": "https://cheewliu.github.io/",
+        "name": "Liu Chee Wei (Jacky) — R&D Software Lead Engineer",
+        "isPartOf": { "@id": "https://cheewliu.github.io/#website" },
+        "about": { "@id": "https://cheewliu.github.io/#person" },
+        "mainEntity": { "@id": "https://cheewliu.github.io/#person" },
+        "primaryImageOfPage": "https://cheewliu.github.io/assets/profile.jpg",
+        "inLanguage": "en"
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://cheewliu.github.io/" },
+          { "@type": "ListItem", "position": 2, "name": "Resume", "item": "https://cheewliu.github.io/resume.html" }
+        ]
+      }
     ]
   }
   </script>
