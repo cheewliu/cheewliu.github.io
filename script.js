@@ -320,9 +320,9 @@ Software architect and lead engineer with 13+ years across automotive test autom
 
 SKILLS
 Languages: C#, WPF, C++, Python, JavaScript, PowerShell
-Frameworks & Tools: OpenTAP, PTEM, .NET, Docker, Jenkins, Azure DevOps, Git
+Frameworks & Tools: OpenTAP, PTEM, .NET, Git, Cloudflare Workers, Claude API
 Domain: EV/ADAS, LiDAR, HIL Testing, SECS/GEM, Automotive SPICE, EV Manufacturing Testing
-Leadership: Scrum Master, Software Architecture, CI/CD, Agile
+Leadership: Scrum Master, Software Architecture, Agile, Test Automation
 
 EXPERIENCE
 R&D Software Lead Engineer | Keysight Technologies Malaysia | Oct 2019 – Present
