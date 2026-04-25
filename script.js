@@ -76,7 +76,7 @@ themeToggle.addEventListener('click', () => {
 // Fade-up: sections, cards, panels
 const fadeEls = document.querySelectorAll(
   '.timeline-item, .project-card, .skill-category, .contact-card, ' +
-  '.about-text, .resume-cta, .recruiter-tool, .certs-card, .patents-card'
+  '.about-text, .resume-cta, .recruiter-tool, .certs-card, .patents-card, .featured-card'
 );
 fadeEls.forEach(el => el.classList.add('fade-in'));
 
