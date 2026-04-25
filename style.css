@@ -1730,3 +1730,73 @@ body.light-mode .featured-badge {
 }
 
 .featured-dot { flex-shrink: 0; }
+
+/* ── About meta grid (Certs + Languages, side by side) ── */
+.about-meta-grid {
+  margin-top: 2.5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.about-meta-grid .certs-card {
+  margin-top: 0;
+}
+
+@media (max-width: 720px) {
+  .about-meta-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+}
+
+/* ── Card hover polish ── */
+.featured-card,
+.patents-card,
+.certs-card,
+.contact-card,
+.project-card {
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.featured-card:hover,
+.certs-card:hover,
+.contact-card:hover,
+.project-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(100, 255, 218, 0.4);
+  box-shadow: 0 8px 24px rgba(100, 255, 218, 0.08);
+}
+
+body.light-mode .featured-card:hover,
+body.light-mode .certs-card:hover,
+body.light-mode .contact-card:hover,
+body.light-mode .project-card:hover {
+  border-color: rgba(91, 33, 182, 0.4);
+  box-shadow: 0 8px 24px rgba(91, 33, 182, 0.12);
+}
+
+.patents-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(245, 158, 11, 0.12);
+  border-color: #92400e88;
+}
+
+.patent-item,
+.cert-item {
+  transition: transform 0.18s ease, background 0.18s ease;
+}
+
+.patent-item:hover {
+  transform: translateX(3px);
+  background: rgba(245, 158, 11, 0.06);
+}
+
+.cert-item:hover {
+  background: rgba(100, 255, 218, 0.04);
+  border-radius: 4px;
+}
+
+body.light-mode .cert-item:hover {
+  background: rgba(91, 33, 182, 0.05);
+}

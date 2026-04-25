@@ -304,8 +304,16 @@ Rules: third person, specific about tech and domain, under 65 words, no filler p
     await typewriter(bodyEl, summary);
 
   } catch (err) {
-    // Silently hide on any failure — don't surface errors to visitors
-    block.style.display = 'none';
+    // Graceful fallback: render the static bio embedded in data-fallback,
+    // swap the badge label so it doesn't claim AI output it didn't generate.
+    const fallback = bodyEl.getAttribute('data-fallback');
+    if (fallback) {
+      bodyEl.textContent = fallback;
+      const badge = document.getElementById('ai-summary-badge');
+      if (badge) badge.textContent = '✦ Profile summary';
+    } else {
+      block.style.display = 'none';
+    }
   }
 }
 
