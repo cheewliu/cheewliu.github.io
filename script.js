@@ -3,6 +3,13 @@
    ========================================================= */
 const GITHUB_USERNAME = 'cheewliu';
 
+// Featured repos — leave empty array [] to show all (filtered).
+// Add repo names here to pin specific ones in this exact order.
+const GITHUB_PINNED = []; // e.g. ['cheewliu.github.io', 'opentap-helper']
+
+// Max repos to display after filtering
+const GITHUB_MAX_REPOS = 6;
+
 // Cloudflare Worker proxy — API key lives in Cloudflare secrets, never here
 const CLAUDE_PROXY = 'https://jacky-portfolio-proxy.cheewei-1988.workers.dev';
 const CLAUDE_MODEL = 'claude-sonnet-4-20250514';
@@ -54,19 +61,24 @@ function highlightActiveSection() {
 /* =========================================================
    DARK / LIGHT MODE TOGGLE
    ========================================================= */
-const themeToggle = document.getElementById('theme-toggle');
+const themeToggle  = document.getElementById('theme-toggle');
+const iconMoon     = document.getElementById('theme-icon-moon');
+const iconSun      = document.getElementById('theme-icon-sun');
 
 function applyTheme(light) {
   document.body.classList.toggle('light-mode', light);
-  themeToggle.textContent = light ? '☀' : '☾';
+  if (iconMoon && iconSun) {
+    iconMoon.classList.toggle('hidden', light);
+    iconSun.classList.toggle('hidden', !light);
+  }
 }
 
 // Restore saved preference
 applyTheme(localStorage.getItem('theme') === 'light');
 
 themeToggle.addEventListener('click', () => {
-  const isLight = document.body.classList.toggle('light-mode');
-  themeToggle.textContent = isLight ? '☀' : '☾';
+  const isLight = !document.body.classList.contains('light-mode');
+  applyTheme(isLight);
   localStorage.setItem('theme', isLight ? 'light' : 'dark');
 });
 
@@ -203,11 +215,26 @@ function retryGitHub() {
 
 function renderRepos(repos, grid, loading) {
   loading.remove();
-  if (!repos.length) {
+
+  // Filter + curate: pinned takes priority, otherwise drop forks/archived,
+  // sort by stars then recent push, cap at GITHUB_MAX_REPOS.
+  let curated;
+  if (GITHUB_PINNED.length) {
+    const byName = Object.fromEntries(repos.map(r => [r.name, r]));
+    curated = GITHUB_PINNED.map(n => byName[n]).filter(Boolean);
+  } else {
+    curated = repos
+      .filter(r => !r.fork && !r.archived)
+      .sort((a, b) => (b.stargazers_count - a.stargazers_count)
+        || (new Date(b.pushed_at) - new Date(a.pushed_at)))
+      .slice(0, GITHUB_MAX_REPOS);
+  }
+
+  if (!curated.length) {
     grid.innerHTML = `<p class="projects-loading">No public repositories found.</p>`;
     return;
   }
-  repos.forEach(repo => {
+  curated.forEach(repo => {
     const card = document.createElement('a');
     card.className = 'project-card fade-in';
     card.href      = repo.html_url;
@@ -407,6 +434,8 @@ async function analyzeJobFit() {
   errorEl.classList.add('hidden');
   document.getElementById('recruiter-rate-msg').classList.add('hidden');
   btn.disabled = true;
+  const btnOriginalText = btn.textContent;
+  btn.textContent = 'Analyzing…';
 
   const prompt = `You are an expert technical recruiter and career coach. Analyze the job description against the candidate's resume, then write a tailored cover letter.
 
@@ -459,11 +488,17 @@ Cover letter: address a specific role requirement in the opening, reference exac
     loadingEl.classList.add('hidden');
     resultsEl.classList.remove('hidden');
     resultsEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    btn.textContent = btnOriginalText;
+    // Re-enable only if quota remains (updateRateDisplay disables at cap)
+    if (parseInt(sessionStorage.getItem(RATE_KEY) || '0') < MAX_ANALYSES) {
+      btn.disabled = false;
+    }
 
   } catch (err) {
     console.error('Recruiter tool error:', err);
     loadingEl.classList.add('hidden');
     errorEl.classList.remove('hidden');
+    btn.textContent = btnOriginalText;
     btn.disabled = false;
   }
 }
@@ -523,6 +558,7 @@ function copyCoverLetter() {
   const btn  = document.getElementById('copy-btn');
   navigator.clipboard.writeText(text).then(() => {
     btn.textContent = 'Copied!';
+    showToast('Cover letter copied ✓');
     setTimeout(() => { btn.textContent = 'Copy'; }, 2000);
   }).catch(() => {
     // Fallback: select the text so user can Ctrl+C
@@ -560,3 +596,39 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
+
+/* =========================================================
+   TOAST — small bottom notification
+   ========================================================= */
+let toastTimer;
+function showToast(msg, ms = 1800) {
+  const toast = document.getElementById('toast');
+  if (!toast) return;
+  toast.textContent = msg;
+  toast.classList.remove('hidden');
+  // Force reflow so transition fires from hidden→visible
+  void toast.offsetWidth;
+  toast.classList.add('visible');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => {
+    toast.classList.remove('visible');
+    setTimeout(() => toast.classList.add('hidden'), 250);
+  }, ms);
+}
+
+/* =========================================================
+   BACK-TO-TOP — show button after scroll, smooth scroll on click
+   ========================================================= */
+const backToTop = document.getElementById('back-to-top');
+if (backToTop) {
+  const toggleBackToTop = () => {
+    const show = window.scrollY > 600;
+    backToTop.classList.toggle('visible', show);
+    backToTop.classList.toggle('hidden', !show);
+  };
+  toggleBackToTop();
+  window.addEventListener('scroll', toggleBackToTop, { passive: true });
+  backToTop.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+}

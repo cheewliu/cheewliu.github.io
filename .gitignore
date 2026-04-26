@@ -3,3 +3,6 @@ worker/node_modules/
 worker/.wrangler/
 worker/wrangler.toml
 .claude/
+*.code-workspace
+.DS_Store
+Thumbs.db

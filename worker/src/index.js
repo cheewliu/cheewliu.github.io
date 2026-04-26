@@ -7,7 +7,7 @@
  *
  * - Injects secrets from Cloudflare (never exposed to the browser)
  * - Enforces CORS (portfolio domain + localhost dev)
- * - Rate limits Claude calls: 20 requests per IP per hour via KV
+ * - Rate limits Claude calls: 50 requests per IP per hour via KV
  */
 
 const ALLOWED_ORIGINS = [
@@ -85,7 +85,7 @@ export default {
 
     if (requests.length >= RATE_LIMIT_MAX) {
       return buildResponse(
-        JSON.stringify({ error: 'Rate limit exceeded — max 20 requests per hour.' }),
+        JSON.stringify({ error: `Rate limit exceeded — max ${RATE_LIMIT_MAX} requests per hour.` }),
         429,
         origin
       );
@@ -133,10 +133,16 @@ export default {
 
 function buildResponse(body, status, origin) {
   const headers = {
-    'Content-Type':                 'application/json',
-    'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-    'Access-Control-Allow-Headers': 'Content-Type',
-    'Access-Control-Max-Age':       '86400',
+    'Content-Type':                  'application/json',
+    'Access-Control-Allow-Methods':  'GET, POST, OPTIONS',
+    'Access-Control-Allow-Headers':  'Content-Type',
+    'Access-Control-Max-Age':        '86400',
+    // Security headers
+    'X-Content-Type-Options':        'nosniff',
+    'X-Frame-Options':               'DENY',
+    'Referrer-Policy':               'strict-origin-when-cross-origin',
+    'Strict-Transport-Security':     'max-age=31536000; includeSubDomains',
+    'Cache-Control':                 'no-store',
   };
   if (origin) headers['Access-Control-Allow-Origin'] = origin;
   return new Response(body, { status, headers });
