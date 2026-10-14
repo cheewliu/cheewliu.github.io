@@ -24,8 +24,8 @@ No frameworks. No build step. Deployed by pushing to GitHub Pages.
 | File / Path | Purpose |
 |---|---|
 | `index.html` | Main portfolio page (single-page with anchored sections) |
-| `resume.html` | Printable/PDF resume page |
-| `style.css` | All styling — dark/light mode, animations, responsive layout |
+| `resume.html` | Printable A4 résumé page (source for `resume.pdf`) |
+| `style.css` | All styling — design tokens, light/dark themes, responsive layout |
 | `script.js` | All frontend logic — navbar, AI calls, GitHub fetch, animations |
 | `config.js` | Local dev only — holds `ANTHROPIC_API_KEY`. **Gitignored.** |
 | `config.example.js` | Template for `config.js`. Safe to commit. |
@@ -42,18 +42,21 @@ No frameworks. No build step. Deployed by pushing to GitHub Pages.
 ## Key Features
 
 ### AI Skills Summary
-On page load, Claude generates a concise professional bio. Result is cached in `sessionStorage` so the API is only called once per browser session.
+When the About section scrolls into view, Claude writes a short professional bio. Result is cached in `sessionStorage` so the API is only called once per browser session; on failure a static `data-fallback` bio is shown.
 
 ### AI Recruiter Tool
-User pastes a job description; a single API call returns:
-- A **match score** (0–100) rendered as an animated ring meter
-- A tailored **cover letter**
+User pastes a job description (or picks a sample JD); a single API call with a JSON schema (`output_config.format`) returns:
+- A **match score** (0–100) and verdict, rendered as an animated ring
+- **Strengths** and **gaps**
+- A tailored **cover letter** (copy or download as .txt)
+
+Opus 5.5 responses can include `thinking` blocks before the text, so `callClaude()` in `script.js` reads only `type: "text"` blocks. Limited to 3 analyses per session.
 
 ### GitHub Projects Grid
 Live repo grid fetched via the Worker proxy (`GET /github`). Falls back to unauthenticated GitHub API if the Worker is unavailable. Results are cached in `sessionStorage` for 10 minutes.
 
 ### Dark / Light Mode
-Toggle persisted to `localStorage`. Default is dark.
+Toggle persisted to `localStorage`. Default follows the OS `prefers-color-scheme`; an inline script in `<head>` sets `data-theme` on `<html>` before first paint.
 
 ---
 
@@ -105,7 +108,7 @@ Secrets required: `ANTHROPIC_API_KEY`, `GITHUB_TOKEN` (optional, increases GitHu
 | Layer | Detail |
 |---|---|
 | Frontend | Plain HTML5, CSS3, vanilla JS (ES2020+) |
-| AI model | `claude-sonnet-4-20250514` via Anthropic API |
+| AI model | `claude-opus-5-5` via Anthropic API (effort `low`, structured JSON output for AI Match) |
 | API proxy | Cloudflare Worker (module syntax) |
 | Hosting | GitHub Pages |
 | SEO | Schema.org JSON-LD, Open Graph, Twitter Card, canonical URL |

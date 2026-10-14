@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://jacky-portfolio-proxy.cheewei-1988.workers.dev https://api.github.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self';" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https:; font-src 'self' data: https://fonts.gstatic.com; connect-src 'self' https://jacky-portfolio-proxy.cheewei-1988.workers.dev https://api.github.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self';" />
   <meta http-equiv="X-Content-Type-Options" content="nosniff" />
   <meta name="referrer" content="strict-origin-when-cross-origin" />
   <title>Liu Chee Wei (Jacky) — R&D Software Manager</title>
-  <meta name="description" content="Portfolio of Liu Chee Wei (Jacky) — R&D Software Manager specializing in EV/ADAS test automation, OpenTAP/PTEM, LiDAR, and AI-powered tooling. 13+ years at Keysight Technologies. 2 US patents." />
+  <meta name="description" content="Liu Chee Wei (Jacky), R&D Software Manager at Keysight Technologies. Leads a 10-engineer team building EV/ADAS test automation on OpenTAP/PTEM. 15 years in automotive test and semiconductor software. Co-inventor of 2 US patents." />
   <!-- Open Graph / LinkedIn / Facebook -->
   <meta property="og:title" content="Liu Chee Wei (Jacky) — R&D Software Manager" />
-  <meta property="og:description" content="Software architect with 13+ years in EV/ADAS test automation. Co-inventor of 2 US patents. Building purposeful AI tools." />
+  <meta property="og:description" content="Engineering leader for EV/ADAS test automation at Keysight. 15 years in automotive and semiconductor software. Co-inventor of 2 US patents." />
   <meta property="og:url" content="https://cheewliu.github.io/" />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="https://cheewliu.github.io/assets/profile.jpg" />
@@ -23,22 +23,36 @@
   <meta property="profile:first_name" content="Chee Wei" />
   <meta property="profile:last_name" content="Liu" />
   <meta property="profile:username" content="cheewliu" />
-  <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)" />
-  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#121110" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#f6f3ee" media="(prefers-color-scheme: light)" />
   <!-- Twitter / X -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Liu Chee Wei (Jacky) — R&D Software Manager" />
-  <meta name="twitter:description" content="Software architect with 13+ years in EV/ADAS test automation. Co-inventor of 2 US patents." />
+  <meta name="twitter:description" content="Engineering leader for EV/ADAS test automation at Keysight. Co-inventor of 2 US patents." />
   <meta name="twitter:image" content="https://cheewliu.github.io/assets/profile.jpg" />
   <meta name="author" content="Liu Chee Wei" />
   <meta name="robots" content="index, follow" />
   <meta name="geo.region" content="MY-07" />
   <meta name="geo.placename" content="Penang, Malaysia" />
-  <meta name="keywords" content="Liu Chee Wei, Jacky Liu, EV ADAS test automation, OpenTAP, PTEM, LiDAR, Keysight Technologies, R&D software manager, engineering manager, Penang Malaysia, C#, C++, Python, JavaScript, automotive test automation, ADAS testing engineer, HIL testing, test automation engineer Malaysia, software architect, AI tooling, prompt engineering, US patent inventor, Scrum Master" />
+  <meta name="keywords" content="Liu Chee Wei, Jacky Liu, R&D software manager, engineering manager, EV ADAS test automation, OpenTAP, PTEM, LiDAR, Keysight Technologies, Penang Malaysia, C#, C++, Python, automotive test automation, HIL testing, software architect, AI tooling, US patent inventor, Scrum Master" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="canonical" href="https://cheewliu.github.io/" />
   <link rel="preconnect" href="https://jacky-portfolio-proxy.cheewei-1988.workers.dev" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..600,0..100,0..1;1,9..144,300..600,0..100,0..1&family=Geist:wght@400..700&family=Geist+Mono:wght@400..600&display=swap" />
   <link rel="stylesheet" href="style.css" />
+  <script>
+    // Apply saved or system theme before first paint to avoid a flash
+    (function () {
+      var t = null;
+      try { t = localStorage.getItem('theme'); } catch (e) {}
+      if (t !== 'light' && t !== 'dark') {
+        t = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -49,7 +63,7 @@
         "name": "Liu Chee Wei",
         "alternateName": "Jacky Liu",
         "jobTitle": "R&D Software Manager",
-        "description": "R&D Software Manager at Keysight Technologies with 13+ years in EV/ADAS test automation, OpenTAP/PTEM, and LiDAR systems. Co-inventor of 2 US patents. Based in Penang, Malaysia.",
+        "description": "R&D Software Manager at Keysight Technologies leading a 10-engineer team on PTEM/OpenTAP for EV/ADAS test automation. 15 years in automotive test and semiconductor equipment software. Co-inventor of 2 US patents. Based in Penang, Malaysia.",
         "url": "https://cheewliu.github.io/",
         "image": "https://cheewliu.github.io/assets/profile.jpg",
         "email": "cheewei.1988@gmail.com",
@@ -67,7 +81,7 @@
           { "@type": "Language", "name": "Malay", "alternateName": "ms" }
         ],
         "knowsAbout": [
-          "EV/ADAS Test Automation", "OpenTAP", "PTEM", "LiDAR", "HIL Testing",
+          "Engineering Management", "EV/ADAS Test Automation", "OpenTAP", "PTEM", "LiDAR", "HIL Testing",
           "C#", "C++", "Python", "JavaScript", "Software Architecture",
           "Automotive SPICE", "CAN/LIN", "SECS/GEM", "Scrum",
           "AI Tooling", "Prompt Engineering", "Cloudflare Workers"
@@ -99,6 +113,7 @@
         "about": { "@id": "https://cheewliu.github.io/#person" },
         "mainEntity": { "@id": "https://cheewliu.github.io/#person" },
         "primaryImageOfPage": "https://cheewliu.github.io/assets/profile.jpg",
+        "dateModified": "2026-10-14",
         "inLanguage": "en"
       },
       {
@@ -113,10 +128,10 @@
         "mainEntity": [
           {
             "@type": "Question",
-            "name": "What does Liu Chee Wei (Jacky) specialize in?",
+            "name": "What does Liu Chee Wei (Jacky) do?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "R&D software architecture for EV/ADAS test automation. Manages the R&D software team behind PTEM, built on OpenTAP, at Keysight Technologies, with deep experience in C#, C++, Python, LiDAR target simulation, HIL testing, and SECS/GEM."
+              "text": "He is an R&D Software Manager at Keysight Technologies, leading a 10-engineer team that builds PTEM on OpenTAP for global EV/ADAS test automation programs. He has hands-on depth in C#, C++, Python, LiDAR target simulation, HIL testing and SECS/GEM."
             }
           },
           {
@@ -124,7 +139,7 @@
             "name": "Where is Liu Chee Wei based?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Penang, Malaysia. Open to remote and on-site engagements across Asia-Pacific."
+              "text": "Penang, Malaysia."
             }
           },
           {
@@ -132,7 +147,7 @@
             "name": "What patents does Liu Chee Wei hold?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Co-inventor of two US patents on automated LiDAR target simulation scanning systems and methods (US20220260714A1 and US20230132855A1), filed during work on the Keysight E8717A LiDAR Target Simulator."
+              "text": "Co-inventor of two US patents on automated LiDAR target simulation scanning systems and methods (US20220260714A1 and US20230132855A1), from work on the Keysight E8717A LiDAR Target Simulator."
             }
           },
           {
@@ -140,15 +155,15 @@
             "name": "How many years of experience does Liu Chee Wei have?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "13+ years across automotive test automation at Keysight Technologies, semiconductor equipment software at WAFTECH, and entrepreneurship as co-founder of Makerzone Sdn Bhd."
+              "text": "15 years: automotive test automation at Keysight Technologies, semiconductor equipment software at WAFTECH, and co-founding Makerzone Sdn Bhd."
             }
           },
           {
             "@type": "Question",
-            "name": "How can recruiters or hiring managers contact Liu Chee Wei?",
+            "name": "How can recruiters contact Liu Chee Wei?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Via LinkedIn (linkedin.com/in/jacky-liu-chee-wei), email (cheewei.1988@gmail.com), or the AI Match tool on cheewliu.github.io which generates an instant resume match score and tailored cover letter from any pasted job description."
+              "text": "Via LinkedIn (linkedin.com/in/jacky-liu-chee-wei), email (cheewei.1988@gmail.com), or the AI Match tool on cheewliu.github.io, which returns a match score and tailored cover letter for any pasted job description."
             }
           }
         ]
@@ -159,567 +174,605 @@
 </head>
 <body>
 
-  <!-- Skip navigation for keyboard/screen reader users -->
-  <a href="#hero" class="skip-link">Skip to main content</a>
+  <a href="#main" class="skip-link">Skip to main content</a>
 
-  <!-- NAVBAR -->
-  <nav id="navbar">
-    <div class="nav-logo"><span class="accent">&gt;_</span> jacky.liu</div>
-    <ul class="nav-links">
-      <li><a href="#hero">Home</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#experience">Experience</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#ai-match">AI Match <span class="nav-ai-dot"></span></a></li>
-      <li><a href="#resume">Resume</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-    <button class="nav-theme-toggle" id="theme-toggle" aria-label="Toggle light/dark mode">
-      <svg id="theme-icon-moon" class="theme-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-      <svg id="theme-icon-sun" class="theme-icon hidden" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
-    </button>
-    <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu">&#9776;</button>
-  </nav>
+  <!-- NAV -->
+  <header class="nav" id="nav">
+    <div class="container nav-inner">
+      <a href="#top" class="brand" aria-label="Jacky Liu — back to top">
+        <span class="brand-mark" aria-hidden="true">JL</span>
+        <span>Jacky Liu</span>
+      </a>
 
-  <!-- HERO -->
-  <section id="hero">
-    <div class="hero-content">
-      <p class="hero-greeting">// hello, world</p>
-      <h1 class="hero-name">Liu Chee Wei<br /><span class="accent">Jacky</span></h1>
-      <p class="hero-title">R&amp;D Software Manager</p>
-      <p class="hero-subtitle">Automotive Test Automation · EV/ADAS · OpenTAP/PTEM</p>
-      <p class="hero-tagline">Thinking in systems. Building where AI creates real leverage.</p>
-      <div class="hero-location"><span class="accent">📍</span> Penang, Malaysia</div>
-      <div class="hero-cta">
-        <a href="#projects" class="btn btn-primary">View Projects</a>
-        <a href="#contact" class="btn btn-outline">Get in Touch</a>
-      </div>
-      <a href="#ai-match" class="hero-jd-hook">// paste a JD → get your match score instantly</a>
-    </div>
-    <div class="hero-decoration" aria-hidden="true">
-      <div class="terminal-window">
-        <div class="terminal-bar">
-          <span class="dot red"></span>
-          <span class="dot yellow"></span>
-          <span class="dot green"></span>
-        </div>
-        <div class="terminal-body">
-          <p><span class="t-prompt">$</span> whoami</p>
-          <p class="t-output">jacky_liu</p>
-          <p><span class="t-prompt">$</span> cat specializations.txt</p>
-          <p class="t-output">OpenTAP · PTEM · C# · Python</p>
-          <p class="t-output">EV/ADAS Test Automation</p>
-          <p class="t-output">R&amp;D Architecture</p>
-          <p><span class="t-prompt">$</span> <span class="cursor">█</span></p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ABOUT + SKILLS -->
-  <section id="about">
-    <div class="section-header">
-      <span class="section-number accent">01.</span>
-      <h2>About &amp; Skills</h2>
-      <div class="section-line"></div>
-    </div>
-    <div class="about-grid">
-      <div class="about-text">
-        <div class="profile-photo-wrap">
-          <img src="assets/profile.jpg" alt="Jacky Liu, R&D Software Manager" class="profile-photo" width="180" height="180" fetchpriority="high" decoding="async" />
-        </div>
-        <p>
-          R&amp;D software manager and architect with 13+ years across automotive test automation, semiconductor equipment,
-          and entrepreneurship. At Keysight Technologies, manages the R&amp;D software team behind PTEM after leading its architecture on OpenTAP for global EV/ADAS
-          programs and co-invented two US-patented LiDAR simulation systems. Combines deep technical expertise in
-          C#, C++, and Python with Agile leadership and a systems-first approach to building purposeful tooling.
-          Applies AI purposefully — identifying where it creates real leverage, designing the right interaction,
-          and shipping working tools around it.
-        </p>
-      </div>
-      <div class="skills-grid">
-        <div class="skill-category">
-          <h4>Languages</h4>
-          <div class="skill-tags">
-            <span class="tag">C#</span>
-            <span class="tag">Python</span>
-            <span class="tag">C/C++</span>
-            <span class="tag">JavaScript</span>
-            <span class="tag">PowerShell</span>
-          </div>
-        </div>
-        <div class="skill-category">
-          <h4>Frameworks &amp; Tools</h4>
-          <div class="skill-tags">
-            <span class="tag">OpenTAP</span>
-            <span class="tag">PTEM</span>
-            <span class="tag">.NET</span>
-            <span class="tag">WPF</span>
-            <span class="tag">Git</span>
-            <span class="tag">Cloudflare Workers</span>
-            <span class="tag">Claude API</span>
-          </div>
-        </div>
-        <div class="skill-category">
-          <h4>Domain</h4>
-          <div class="skill-tags">
-            <span class="tag">EV Testing</span>
-            <span class="tag">ADAS</span>
-            <span class="tag">LiDAR</span>
-            <span class="tag">HIL</span>
-            <span class="tag">CAN/LIN</span>
-            <span class="tag">SECS/GEM</span>
-            <span class="tag">Automotive SPICE</span>
-          </div>
-        </div>
-        <div class="skill-category">
-          <h4>Architecture</h4>
-          <div class="skill-tags">
-            <span class="tag">Test Automation</span>
-            <span class="tag">Software Architecture</span>
-            <span class="tag">REST APIs</span>
-            <span class="tag">Prompt Engineering</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Featured work — LiDAR Target Simulator -->
-    <div class="featured-card">
-      <div class="featured-header">
-        <span class="featured-icon">◇</span>
-        <h4>Featured Work — LiDAR Target Simulator</h4>
-        <span class="featured-badge">Keysight E8717A</span>
-      </div>
-      <div class="featured-body">
-        <p class="featured-tagline"><span class="accent monospace">// first-of-market LiDAR target simulation solution</span></p>
-        <ul class="featured-points">
-          <li><span class="featured-dot accent">▸</span> <strong>Only software developer</strong> in the R&amp;D team — owned the entire software stack end-to-end.</li>
-          <li><span class="featured-dot accent">▸</span> <strong>Co-invented 2 US patents</strong> within 2 years on the automated LiDAR target simulation scanning method.</li>
-          <li><span class="featured-dot accent">▸</span> Brought to market as the <strong>Keysight E8717A</strong>.</li>
+      <nav aria-label="Primary">
+        <ul class="nav-links" id="nav-links">
+          <li><a href="#about">About</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#work">Work</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#match">AI Match <span class="nav-ai-dot" aria-hidden="true"></span></a></li>
+          <li><a href="#contact">Contact</a></li>
         </ul>
-      </div>
-    </div>
+      </nav>
 
-    <!-- Patents highlight -->
-    <div class="patents-card">
-      <div class="patents-header">
-        <span class="patents-icon">◈</span>
-        <h4>US Patents</h4>
-        <span class="patents-badge">2 Patents</span>
-      </div>
-      <div class="patents-list">
-        <a class="patent-item" href="https://patents.google.com/patent/US20220260714A1" target="_blank" rel="noopener">
-          <span class="patent-num">US20220260714A1</span>
-          <span class="patent-title">Automated LiDAR Target Simulation Scanning Systems &amp; Methods</span>
-          <span class="patent-uspto">⚿ USPTO</span>
-        </a>
-        <a class="patent-item" href="https://patents.google.com/patent/US20230132855A1" target="_blank" rel="noopener">
-          <span class="patent-num">US20230132855A1</span>
-          <span class="patent-title">Automated LiDAR Target Simulation Scanning Systems and Methods</span>
-          <span class="patent-uspto">⚿ USPTO</span>
-        </a>
-      </div>
-    </div>
-
-    <!-- Secondary info: Certifications + Languages in 2-col grid -->
-    <div class="about-meta-grid">
-      <!-- Certifications -->
-      <div class="certs-card">
-        <div class="certs-header">
-          <span class="certs-title monospace accent">// certifications</span>
-        </div>
-        <div class="certs-list">
-          <div class="cert-item">
-            <span class="cert-dot">▸</span>
-            <div>
-              <span class="cert-name">Agile SCRUM for Practitioners</span>
-              <span class="cert-meta">DreamCatcher Consulting &mdash; Feb 2026</span>
-            </div>
-          </div>
-          <div class="cert-item">
-            <span class="cert-dot">▸</span>
-            <div>
-              <span class="cert-name">Practical AI with Machine and Deep Learning</span>
-              <span class="cert-meta">DreamCatcher Consulting &mdash; Mar 2021</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Languages -->
-      <div class="certs-card">
-        <div class="certs-header">
-          <span class="certs-title monospace accent">// languages</span>
-        </div>
-        <div class="certs-list">
-          <div class="cert-item">
-            <span class="cert-dot">▸</span>
-            <div>
-              <span class="cert-name">Chinese</span>
-              <span class="cert-meta">Native</span>
-            </div>
-          </div>
-          <div class="cert-item">
-            <span class="cert-dot">▸</span>
-            <div>
-              <span class="cert-name">English</span>
-              <span class="cert-meta">Professional</span>
-            </div>
-          </div>
-          <div class="cert-item">
-            <span class="cert-dot">▸</span>
-            <div>
-              <span class="cert-name">Malay</span>
-              <span class="cert-meta">Conversational</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </section>
-
-  <!-- WORK EXPERIENCE -->
-  <section id="experience">
-    <div class="section-header">
-      <span class="section-number accent">02.</span>
-      <h2>Work Experience</h2>
-      <div class="section-line"></div>
-    </div>
-    <div class="timeline">
-
-      <div class="timeline-item">
-        <div class="timeline-marker"></div>
-        <div class="timeline-content">
-          <div class="timeline-header">
-            <h3>R&amp;D Software Manager</h3>
-            <span class="timeline-company">Keysight Technologies Malaysia</span>
-          </div>
-          <span class="timeline-period">Sep 2026 – Present</span>
-          <ul class="timeline-bullets">
-            <li>Manage an R&amp;D software team of 10 engineers delivering PTEM on OpenTAP for global EV/ADAS test automation programs</li>
-            <li>Own team roadmap, delivery planning, and stakeholder alignment across global automotive programs</li>
-            <li>Drive hiring, performance reviews, and career development for the engineering team</li>
-          </ul>
-          <div class="timeline-tags">
-            <span class="tag small">Leadership</span>
-            <span class="tag small">PTEM</span>
-            <span class="tag small">EV/ADAS</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="timeline-item">
-        <div class="timeline-marker"></div>
-        <div class="timeline-content">
-          <div class="timeline-header">
-            <h3>R&amp;D Software Lead Engineer</h3>
-            <span class="timeline-company">Keysight Technologies Malaysia</span>
-          </div>
-          <span class="timeline-period">Oct 2019 – Aug 2026</span>
-          <ul class="timeline-bullets">
-            <li>Led engineering team of 10 on PTEM architecture and development, built on OpenTAP for global EV/ADAS test automation programs</li>
-            <li>Served as Scrum Master and established the SQ release process across global automotive programs</li>
-            <li>Main developer on the LiDAR Target Simulator project; co-invented 2 US patents within 2 years as part of a 4-engineer team; productized as Keysight E8717A</li>
-          </ul>
-          <div class="timeline-tags">
-            <span class="tag small">OpenTAP</span>
-            <span class="tag small">PTEM</span>
-            <span class="tag small">EV/ADAS</span>
-            <span class="tag small">LiDAR</span>
-            <span class="tag small">Scrum</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="timeline-item">
-        <div class="timeline-marker"></div>
-        <div class="timeline-content">
-          <div class="timeline-header">
-            <h3>Motion Control &amp; Software Dev Senior Engineer</h3>
-            <span class="timeline-company">WAFTECH</span>
-          </div>
-          <span class="timeline-period">Apr 2016 – Sep 2019</span>
-          <ul class="timeline-bullets">
-            <li>Built next-gen machine control software using C# and WPF</li>
-            <li>Implemented SECS/GEM integration for semiconductor equipment communication</li>
-            <li>Led on-site deployments and mentored junior engineers</li>
-          </ul>
-          <div class="timeline-tags">
-            <span class="tag small">C#</span>
-            <span class="tag small">WPF</span>
-            <span class="tag small">SECS/GEM</span>
-            <span class="tag small">Motion Control</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="timeline-item">
-        <div class="timeline-marker"></div>
-        <div class="timeline-content">
-          <div class="timeline-header">
-            <h3>Co-Founder</h3>
-            <span class="timeline-company">Makerzone Sdn Bhd</span>
-          </div>
-          <span class="timeline-period">Apr 2011 – Mar 2016</span>
-          <ul class="timeline-bullets">
-            <li>Founded a 3D printing service business from the ground up</li>
-            <li>Built and managed the company marketing website</li>
-            <li>Handled end-to-end customer projects from design to delivery</li>
-          </ul>
-          <div class="timeline-tags">
-            <span class="tag small">Entrepreneurship</span>
-            <span class="tag small">3D Printing</span>
-            <span class="tag small">Web</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="timeline-item">
-        <div class="timeline-marker"></div>
-        <div class="timeline-content">
-          <div class="timeline-header">
-            <h3>Machine Automation Software Engineer</h3>
-            <span class="timeline-company">WAFTECH</span>
-          </div>
-          <span class="timeline-period">Oct 2014 – Apr 2015</span>
-          <ul class="timeline-bullets">
-            <li>Developed motion control and wafer handling software in C# and WPF</li>
-          </ul>
-          <div class="timeline-tags">
-            <span class="tag small">C#</span>
-            <span class="tag small">WPF</span>
-            <span class="tag small">Motion Control</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="timeline-item">
-        <div class="timeline-marker"></div>
-        <div class="timeline-content">
-          <div class="timeline-header">
-            <h3>R&amp;D System Engineer</h3>
-            <span class="timeline-company">Keysight Technologies Malaysia</span>
-          </div>
-          <span class="timeline-period">Jun 2011 – Oct 2014</span>
-          <ul class="timeline-bullets">
-            <li>Developed automotive test systems using C++</li>
-            <li>Supported TS-5000 hardware handler library</li>
-          </ul>
-          <div class="timeline-tags">
-            <span class="tag small">C++</span>
-            <span class="tag small">Test Systems</span>
-            <span class="tag small">Automotive</span>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- GITHUB PROJECTS -->
-  <section id="projects">
-    <div class="section-header">
-      <span class="section-number accent">03.</span>
-      <h2>GitHub Projects</h2>
-      <div class="section-line"></div>
-    </div>
-    <div class="projects-meta">
-      <p>Fetching repos from <span class="accent monospace">cheewliu</span> &mdash;</p>
-    </div>
-    <div class="projects-grid" id="projects-grid">
-      <div class="projects-loading" id="projects-loading">
-        <span class="accent monospace">$ git fetch --all</span><br />
-        <span class="t-output">Loading repositories...</span>
-      </div>
-    </div>
-    <div class="projects-error hidden" id="projects-error">
-      <span class="accent">!</span> Could not load repositories.
-      <button class="btn-text-link" onclick="retryGitHub()">Retry</button>
-      &mdash; or <a href="https://github.com/cheewliu" target="_blank" rel="noopener">View on GitHub</a>
-    </div>
-  </section>
-
-  <!-- AI MATCH -->
-  <section id="ai-match">
-    <div class="section-header">
-      <span class="section-number accent">04.</span>
-      <h2>AI Match</h2>
-      <div class="section-line"></div>
-    </div>
-    <div class="ai-match-intro">
-      <p class="ai-match-headline">// recruiter_tool.ai</p>
-      <p class="ai-match-subtext">See how Jacky's profile fits your role — match score, key strengths, gaps, and a tailored cover letter. One API call.</p>
-    </div>
-
-    <!-- RECRUITER AI TOOL -->
-    <div class="recruiter-tool" id="recruiter-tool">
-
-      <!-- 1. Card title -->
-      <div class="recruiter-header">
-        <div class="recruiter-title-row">
-          <span class="recruiter-title accent monospace">// recruiter_tool.ai</span>
-          <span class="ai-badge">✦ AI-powered</span>
-        </div>
-      </div>
-
-      <!-- 2. AI-generated profile summary (Claude describing Jacky) -->
-      <div class="ai-summary" id="ai-summary">
-        <div class="ai-summary-header">
-          <span class="ai-header-cursor">▊</span>
-          <span class="ai-badge" id="ai-summary-badge">✦ Generated by AI</span>
-        </div>
-        <div class="ai-summary-body" id="ai-summary-body" data-fallback="R&amp;D Software Manager at Keysight Technologies with 13+ years across automotive test automation, semiconductor equipment, and entrepreneurship. Architected PTEM on OpenTAP for global EV/ADAS programs and co-invented 2 US patents on LiDAR target simulation. Specializes in C#, C++, Python, and shipping AI tooling that creates real engineering leverage.">
-          <span class="ai-loading">Analyzing profile<span class="ai-dots"><span>.</span><span>.</span><span>.</span></span></span>
-        </div>
-      </div>
-
-      <!-- 3. Divider -->
-      <div class="recruiter-divider"></div>
-
-      <!-- 4. Recruiter-facing instruction -->
-      <p class="recruiter-desc">Drop in a job description to see how Jacky's profile matches — and get a tailored cover letter in seconds.</p>
-
-      <!-- 5. Textarea + counter + button -->
-      <div class="recruiter-input-group">
-        <textarea
-          id="jd-input"
-          class="jd-textarea"
-          placeholder="Paste a job description here..."
-          maxlength="3000"
-          rows="6"
-          aria-label="Job description — paste here to analyze fit"
-        ></textarea>
-        <div class="jd-meta">
-          <span id="jd-counter" class="jd-counter">0 / 3000</span>
-          <span id="jd-rate-display" class="jd-rate"></span>
-        </div>
-        <button class="btn btn-primary" id="analyze-btn" onclick="analyzeJobFit()">
-          Analyze Fit
+      <div class="nav-actions">
+        <button class="icon-btn" id="theme-toggle" type="button" aria-label="Switch color theme">
+          <svg class="theme-icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          <svg class="theme-icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        </button>
+        <a href="resume.html" class="btn btn-primary btn-sm nav-resume">Résumé</a>
+        <button class="icon-btn nav-menu-btn" id="menu-btn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
         </button>
       </div>
+    </div>
+  </header>
 
-      <!-- 6. Loading state -->
-      <div class="recruiter-loading hidden" id="recruiter-loading">
-        <span class="ai-loading">Analyzing job fit<span class="ai-dots"><span>.</span><span>.</span><span>.</span></span></span>
-      </div>
+  <main id="main">
 
-      <!-- 7. Results panels -->
-      <div class="recruiter-results hidden" id="recruiter-results">
-        <!-- Panel 1: Resume Match -->
-        <div class="result-panel">
-          <h4 class="result-panel-title">Resume Match</h4>
-          <div class="score-wrap">
-            <div class="score-ring-container">
-              <svg class="score-ring" viewBox="0 0 100 100" role="img" aria-label="Match score">
-                <circle class="score-ring-track" cx="50" cy="50" r="42"/>
-                <circle class="score-ring-fill" id="score-ring-fill" cx="50" cy="50" r="42"/>
-              </svg>
-              <div class="score-overlay" aria-live="polite">
-                <span class="score-number" id="score-number">0</span>
-                <span class="score-unit">%</span>
+    <!-- HERO -->
+    <section class="hero" id="top">
+      <div class="container">
+        <div class="hero-grid">
+          <div>
+            <div class="hero-badge reveal">
+              <span class="pill">New role</span>
+              R&amp;D Software Manager at Keysight · Sep 2026
+            </div>
+            <h1 class="display reveal">I lead the team building <em>EV &amp; ADAS</em> test automation.</h1>
+            <p class="hero-lede reveal">
+              I'm <strong>Liu Chee Wei (Jacky)</strong>, an engineering manager in Penang, Malaysia.
+              My team of 10 builds PTEM on OpenTAP for global automotive programs. Before managing,
+              I architected it, and earlier I wrote the software behind two US patents in LiDAR target simulation.
+            </p>
+            <div class="hero-actions reveal">
+              <a href="#match" class="btn btn-accent">
+                Check fit against your role
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </a>
+              <a href="resume.pdf" download class="btn btn-ghost">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v12M6 12l6 6 6-6M5 20h14"/></svg>
+                Download résumé
+              </a>
+            </div>
+          </div>
+
+          <div class="hero-portrait reveal">
+            <figure>
+              <img src="assets/profile.jpg" alt="Portrait of Jacky Liu" width="800" height="1067" fetchpriority="high" decoding="async" />
+            </figure>
+            <div class="hero-card">
+              <span class="hero-card-icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              </span>
+              <div>
+                <strong>Leading 10 engineers</strong>
+                <span>PTEM · OpenTAP · EV/ADAS</span>
               </div>
             </div>
-            <div class="score-details">
-              <div class="score-group" id="match-strengths"></div>
-              <div class="score-group" id="match-gaps"></div>
+          </div>
+        </div>
+
+        <dl class="stats">
+          <div class="stat reveal">
+            <dt class="sr-only">Years of experience</dt>
+            <dd><div class="stat-num">15</div><div class="stat-label">years in automotive &amp; semiconductor software</div></dd>
+          </div>
+          <div class="stat reveal">
+            <dt class="sr-only">Team size</dt>
+            <dd><div class="stat-num">10</div><div class="stat-label">engineers on the team I manage</div></dd>
+          </div>
+          <div class="stat reveal">
+            <dt class="sr-only">Patents</dt>
+            <dd><div class="stat-num">2</div><div class="stat-label">US patents, LiDAR target simulation</div></dd>
+          </div>
+          <div class="stat reveal">
+            <dt class="sr-only">Product shipped</dt>
+            <dd><div class="stat-num">E8717A</div><div class="stat-label">Keysight product I built the software for</div></dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="section" id="about">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">About</span>
+          <h2>Manager by title, <em>engineer</em> by habit.</h2>
+          <p>I moved from writing the code to leading the people who write it. Three things I bring to a team:</p>
+        </div>
+
+        <div class="about-grid">
+          <article class="pillar reveal">
+            <span class="pillar-icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </span>
+            <h3>Lead the team</h3>
+            <p>Manage a 10-engineer R&amp;D team: roadmap, delivery, hiring and career growth. Scrum Master background, so delivery stays predictable.</p>
+          </article>
+          <article class="pillar reveal">
+            <span class="pillar-icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/><path d="M10 6.5h4M17.5 10v4M6.5 10v7.5H14"/></svg>
+            </span>
+            <h3>Architect the system</h3>
+            <p>Architected PTEM on OpenTAP for global EV/ADAS programs and set up the SQ release process used across those programs.</p>
+          </article>
+          <article class="pillar reveal">
+            <span class="pillar-icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 15l.9 2.1L22 18l-2.1.9L19 21l-.9-2.1L16 18l2.1-.9z"/></svg>
+            </span>
+            <h3>Use AI where it helps</h3>
+            <p>Find the spots where AI gives real engineering leverage, then ship a working tool. The job-match tool on this page is one.</p>
+          </article>
+        </div>
+
+        <div class="ai-bio reveal" id="ai-bio">
+          <span class="ai-bio-label">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.4 7.2L22 12l-7.6 2.8L12 22l-2.4-7.2L2 12l7.6-2.8z"/></svg>
+            <span id="ai-bio-badge">Claude's summary</span>
+          </span>
+          <p class="ai-bio-body" id="ai-bio-body" aria-live="polite"
+             data-fallback="R&amp;D Software Manager at Keysight Technologies leading a 10-engineer team that builds PTEM on OpenTAP for global EV/ADAS test automation. Fifteen years across automotive test, semiconductor equipment software and a startup, with two US patents in LiDAR target simulation and hands-on depth in C#, C++ and Python.">
+            <span class="muted">Writing a summary…</span>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section class="section" id="experience">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Experience</span>
+          <h2>Fifteen years, from <em>engineer</em> to manager.</h2>
+        </div>
+
+        <div class="roles">
+          <article class="role current reveal">
+            <div class="role-when">
+              <span>Sep 2026 — Present</span>
+              <span class="role-tag">Current</span>
+            </div>
+            <div>
+              <div class="role-head"><h3>R&amp;D Software Manager</h3></div>
+              <p class="role-company">Keysight Technologies · Penang, Malaysia</p>
+              <ul>
+                <li>Manage a <strong>10-engineer R&amp;D software team</strong> delivering PTEM on OpenTAP for global EV/ADAS test automation programs.</li>
+                <li>Own the team roadmap, delivery planning and stakeholder alignment across global automotive programs.</li>
+                <li>Hire, coach and develop engineers; run performance reviews and career growth plans.</li>
+              </ul>
+              <div class="chips">
+                <span class="chip">Engineering management</span>
+                <span class="chip">PTEM</span>
+                <span class="chip">OpenTAP</span>
+                <span class="chip">EV/ADAS</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="role reveal">
+            <div class="role-when">
+              <span>Oct 2019 — Aug 2026</span>
+              <span class="role-tag muted">Promoted</span>
+            </div>
+            <div>
+              <div class="role-head"><h3>R&amp;D Software Lead Engineer</h3></div>
+              <p class="role-company">Keysight Technologies · Penang, Malaysia</p>
+              <ul>
+                <li>Led a team of 10 on <strong>PTEM architecture and development</strong>, built on OpenTAP, for global EV/ADAS test automation programs.</li>
+                <li>Scrum Master; <strong>established the SQ release process</strong> across global automotive programs.</li>
+                <li>Sole software developer on the 4-engineer LiDAR Target Simulator team; <strong>co-invented 2 US patents in 2 years</strong>; product shipped as the Keysight E8717A.</li>
+              </ul>
+              <div class="chips">
+                <span class="chip">OpenTAP</span>
+                <span class="chip">PTEM</span>
+                <span class="chip">LiDAR</span>
+                <span class="chip">C#</span>
+                <span class="chip">Scrum</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="role reveal">
+            <div class="role-when"><span>Apr 2016 — Sep 2019</span></div>
+            <div>
+              <div class="role-head"><h3>Motion Control &amp; Software Dev Senior Engineer</h3></div>
+              <p class="role-company">WAFTECH · Penang, Malaysia</p>
+              <ul>
+                <li>Built next-generation machine control software in C# and WPF.</li>
+                <li>Implemented SECS/GEM integration for semiconductor equipment communication.</li>
+                <li>Led on-site deployments and mentored junior engineers.</li>
+              </ul>
+              <div class="chips">
+                <span class="chip">C#</span>
+                <span class="chip">WPF</span>
+                <span class="chip">SECS/GEM</span>
+                <span class="chip">Motion control</span>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <details class="roles-more">
+          <summary>
+            <span class="when-closed">Show 3 earlier roles</span>
+            <span class="when-open">Hide earlier roles</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          </summary>
+          <div class="roles" style="border-top:0">
+            <article class="role">
+              <div class="role-when"><span>Apr 2011 — Mar 2016</span></div>
+              <div>
+                <div class="role-head"><h3>Co-Founder</h3></div>
+                <p class="role-company">Makerzone Sdn Bhd · Penang, Malaysia</p>
+                <ul>
+                  <li>Co-founded and ran a 3D printing service business from the ground up.</li>
+                  <li>Built and managed the company website.</li>
+                  <li>Handled customer projects end to end, from design to delivery.</li>
+                </ul>
+                <div class="chips">
+                  <span class="chip">Entrepreneurship</span>
+                  <span class="chip">3D printing</span>
+                  <span class="chip">Web</span>
+                </div>
+              </div>
+            </article>
+            <article class="role">
+              <div class="role-when"><span>Oct 2014 — Apr 2015</span></div>
+              <div>
+                <div class="role-head"><h3>Machine Automation Software Engineer</h3></div>
+                <p class="role-company">WAFTECH · Penang, Malaysia</p>
+                <ul>
+                  <li>Developed motion control and wafer handling software in C# and WPF.</li>
+                </ul>
+                <div class="chips">
+                  <span class="chip">C#</span>
+                  <span class="chip">WPF</span>
+                  <span class="chip">Motion control</span>
+                </div>
+              </div>
+            </article>
+            <article class="role">
+              <div class="role-when"><span>Jun 2011 — Oct 2014</span></div>
+              <div>
+                <div class="role-head"><h3>R&amp;D System Engineer</h3></div>
+                <p class="role-company">Keysight Technologies · Penang, Malaysia</p>
+                <ul>
+                  <li>Developed automotive test systems in C++.</li>
+                  <li>Supported the TS-5000 hardware handler library.</li>
+                </ul>
+                <div class="chips">
+                  <span class="chip">C++</span>
+                  <span class="chip">Test systems</span>
+                  <span class="chip">Automotive</span>
+                </div>
+              </div>
+            </article>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <!-- FEATURED WORK -->
+    <section class="section" id="work">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Featured work</span>
+          <h2>The LiDAR Target Simulator.</h2>
+          <p>A first-of-market way to test automotive LiDAR sensors against simulated targets, now sold as a Keysight product.</p>
+        </div>
+
+        <div class="feature reveal">
+          <div class="feature-body">
+            <span class="eyebrow">My role · Sole software developer</span>
+            <h3>Owned the whole software stack in a 4-engineer R&amp;D team.</h3>
+            <p>Everything the instrument does in software, I built: from the scanning method that became our patents to the code that shipped with the product.</p>
+            <ul class="feature-points">
+              <li><span class="n">01</span><span><strong>Sole software developer</strong> on the R&amp;D team, owning the stack end to end.</span></li>
+              <li><span class="n">02</span><span><strong>Co-invented 2 US patents</strong> within 2 years on the automated LiDAR target simulation scanning method.</span></li>
+              <li><span class="n">03</span><span><strong>Brought to market</strong> as the Keysight E8717A.</span></li>
+            </ul>
+          </div>
+          <div class="feature-visual">
+            <svg class="feature-rings" viewBox="0 0 360 360" aria-hidden="true">
+              <circle cx="180" cy="180" r="60" stroke-width="1.5" opacity=".9"/>
+              <circle cx="180" cy="180" r="100" stroke-width="1" opacity=".5"/>
+              <circle cx="180" cy="180" r="140" stroke-width="1" opacity=".3"/>
+              <circle cx="180" cy="180" r="178" stroke-width="1" opacity=".15"/>
+              <circle class="beam" cx="180" cy="180" r="120" stroke-width="2" opacity=".7"/>
+            </svg>
+            <div class="feature-model"><span>Keysight</span>E8717A</div>
+            <div class="patents">
+              <a class="patent" href="https://patents.google.com/patent/US20220260714A1" target="_blank" rel="noopener">
+                <span class="patent-num">US20220260714A1</span>
+                <span class="patent-title">Automated LiDAR Target Simulation Scanning Systems &amp; Methods</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg>
+              </a>
+              <a class="patent" href="https://patents.google.com/patent/US20230132855A1" target="_blank" rel="noopener">
+                <span class="patent-num">US20230132855A1</span>
+                <span class="patent-title">Automated LiDAR Target Simulation Scanning Systems and Methods</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg>
+              </a>
             </div>
           </div>
         </div>
+      </div>
+    </section>
 
-        <!-- Panel 2: Cover Letter -->
-        <div class="result-panel">
-          <div class="result-panel-header">
-            <h4 class="result-panel-title">Cover Letter</h4>
-            <button class="btn-copy" id="copy-btn" onclick="copyCoverLetter()">Copy</button>
+    <!-- SKILLS & CREDENTIALS -->
+    <section class="section" id="skills">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Skills &amp; credentials</span>
+          <h2>What I work <em>with</em>.</h2>
+        </div>
+
+        <div class="skills-layout">
+          <div class="skill-groups reveal">
+            <div class="skill-group">
+              <h3>Leadership</h3>
+              <div class="chips">
+                <span class="chip">Engineering management</span>
+                <span class="chip">Hiring &amp; coaching</span>
+                <span class="chip">Roadmapping</span>
+                <span class="chip">Scrum / Agile</span>
+                <span class="chip">Release process</span>
+              </div>
+            </div>
+            <div class="skill-group">
+              <h3>Languages</h3>
+              <div class="chips">
+                <span class="chip">C#</span>
+                <span class="chip">C/C++</span>
+                <span class="chip">Python</span>
+                <span class="chip">JavaScript</span>
+                <span class="chip">PowerShell</span>
+              </div>
+            </div>
+            <div class="skill-group">
+              <h3>Platforms &amp; tools</h3>
+              <div class="chips">
+                <span class="chip">OpenTAP</span>
+                <span class="chip">PTEM</span>
+                <span class="chip">.NET</span>
+                <span class="chip">WPF</span>
+                <span class="chip">Git</span>
+                <span class="chip">Claude API</span>
+                <span class="chip">Cloudflare Workers</span>
+              </div>
+            </div>
+            <div class="skill-group">
+              <h3>Domain</h3>
+              <div class="chips">
+                <span class="chip">EV testing</span>
+                <span class="chip">ADAS</span>
+                <span class="chip">LiDAR</span>
+                <span class="chip">HIL</span>
+                <span class="chip">CAN/LIN</span>
+                <span class="chip">SECS/GEM</span>
+                <span class="chip">Automotive SPICE</span>
+              </div>
+            </div>
           </div>
-          <div class="cover-letter-body" id="cover-letter-body"></div>
+
+          <div class="creds reveal">
+            <div class="cred-block">
+              <h3>Education</h3>
+              <div class="cred">
+                <div>
+                  <strong>B.Eng. (Hons) Electrical &amp; Electronic Engineering</strong>
+                  <span>Universiti Tunku Abdul Rahman (UTAR)</span>
+                </div>
+                <span class="when">2011</span>
+              </div>
+            </div>
+            <div class="cred-block">
+              <h3>Certifications</h3>
+              <div class="cred">
+                <div>
+                  <strong>Agile SCRUM for Practitioners</strong>
+                  <span>DreamCatcher Consulting</span>
+                </div>
+                <span class="when">2026</span>
+              </div>
+              <div class="cred">
+                <div>
+                  <strong>Practical AI with Machine and Deep Learning</strong>
+                  <span>DreamCatcher Consulting</span>
+                </div>
+                <span class="when">2021</span>
+              </div>
+            </div>
+            <div class="cred-block">
+              <h3>Languages</h3>
+              <div class="langs">
+                <div>Chinese <span>· Native</span></div>
+                <div>English <span>· Professional</span></div>
+                <div>Malay <span>· Conversational</span></div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
+    </section>
 
-      <div class="recruiter-notice hidden" id="recruiter-rate-msg">
-        <span class="accent">⚠</span> You've used all 3 analyses this session. Refresh the page to start a new session.
-      </div>
-      <div class="recruiter-notice hidden" id="recruiter-error">
-        <span class="accent">!</span> Something went wrong. Please check your connection and try again.
-      </div>
-    </div>
-
-  </section>
-
-  <!-- RESUME -->
-  <section id="resume">
-    <div class="section-header">
-      <span class="section-number accent">05.</span>
-      <h2>Resume</h2>
-      <div class="section-line"></div>
-    </div>
-    <div class="resume-cta">
-      <div class="resume-cta-info">
-        <h3 class="resume-cta-name">Liu Chee Wei (Jacky)</h3>
-        <p class="resume-cta-title">R&amp;D Software Manager &middot; EV/ADAS &middot; OpenTAP/PTEM &middot; LiDAR</p>
-        <p class="resume-cta-summary">13+ years across automotive test automation, semiconductor equipment, and entrepreneurship. Co-inventor of two US-patented LiDAR simulation systems at Keysight Technologies.</p>
-      </div>
-      <div class="resume-cta-actions">
-        <a href="resume.pdf" download class="btn btn-primary resume-download-btn">&#8595; Download PDF</a>
-        <a href="resume.html" target="_blank" rel="noopener" class="btn btn-outline">View Online</a>
-      </div>
-    </div>
-    <p class="resume-last-updated">Last updated: October 2026</p>
-  </section>
-
-  <!-- CONTACT -->
-  <section id="contact">
-    <div class="section-header">
-      <span class="section-number accent">06.</span>
-      <h2>Contact</h2>
-      <div class="section-line"></div>
-    </div>
-    <div class="contact-wrapper">
-      <div class="contact-intro">
-        <p>Have a project, opportunity, or just want to connect? Reach out.</p>
-      </div>
-      <div class="contact-links">
-        <a href="https://linkedin.com/in/jacky-liu-chee-wei" target="_blank" rel="noopener" class="contact-card">
-          <span class="contact-icon">in</span>
-          <div>
-            <strong>LinkedIn</strong>
-            <p>linkedin.com/in/jacky-liu-chee-wei</p>
+    <!-- PROJECTS -->
+    <section class="section" id="projects">
+      <div class="container">
+        <div class="projects-head">
+          <div class="section-head reveal">
+            <span class="eyebrow">Side projects</span>
+            <h2>Recent work on <em>GitHub</em>.</h2>
           </div>
-        </a>
-        <a href="https://github.com/cheewliu" target="_blank" rel="noopener" class="contact-card">
-          <span class="contact-icon">&lt;/&gt;</span>
-          <div>
-            <strong>GitHub</strong>
-            <p>github.com/cheewliu</p>
-          </div>
-        </a>
-        <a href="mailto:cheewei.1988@gmail.com" class="contact-card">
-          <span class="contact-icon">@</span>
-          <div>
-            <strong>Email</strong>
-            <p>cheewei.1988@gmail.com</p>
-          </div>
-        </a>
+          <a class="link-arrow reveal" href="https://github.com/cheewliu" target="_blank" rel="noopener">
+            All repositories
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg>
+          </a>
+        </div>
+        <div class="projects-grid" id="projects-grid" aria-busy="true">
+          <div class="skeleton"></div>
+          <div class="skeleton"></div>
+          <div class="skeleton"></div>
+        </div>
+        <div class="notice hidden" id="projects-error" role="status">
+          Couldn't load repositories right now.
+          <button type="button" id="projects-retry">Try again</button>
+          or
+          <a href="https://github.com/cheewliu" target="_blank" rel="noopener">open GitHub</a>.
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <footer>
-    <p><span class="accent monospace">// EOF</span> &mdash; Built with plain HTML, CSS &amp; JS &mdash; <span class="accent">Liu Chee Wei (Jacky)</span></p>
+    <!-- AI MATCH -->
+    <section class="section match" id="match">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">For recruiters &amp; hiring managers</span>
+          <h2>Is Jacky a fit for your role? <em>Ask Claude.</em></h2>
+          <p>Paste a job description. You'll get an honest match score, where the fit is strong, where it isn't, and a tailored cover letter.</p>
+        </div>
+
+        <div class="match-app reveal">
+          <form class="panel" id="match-form" novalidate>
+            <div class="panel-title">
+              <h3><span class="step">1</span>Job description</h3>
+            </div>
+            <div class="samples">
+              <span>Try a sample:</span>
+              <button type="button" class="sample-btn" data-sample="manager">Engineering Manager</button>
+              <button type="button" class="sample-btn" data-sample="architect">Test Automation Architect</button>
+            </div>
+            <div class="jd-field">
+              <label for="jd-input" class="sr-only">Job description</label>
+              <textarea id="jd-input" class="jd-textarea" maxlength="3000" placeholder="Paste the job description here…"></textarea>
+            </div>
+            <div class="jd-meta">
+              <span id="jd-counter">0 / 3000</span>
+              <span id="jd-rate"></span>
+            </div>
+            <div class="match-submit">
+              <button type="submit" class="btn btn-primary" id="analyze-btn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.4 7.2L22 12l-7.6 2.8L12 22l-2.4-7.2L2 12l7.6-2.8z"/></svg>
+                <span>Analyze fit</span>
+              </button>
+              <span class="kbd-hint"><kbd>Ctrl</kbd> + <kbd>Enter</kbd></span>
+            </div>
+          </form>
+
+          <div class="panel" id="result-panel" aria-live="polite">
+            <div class="panel-title">
+              <h3><span class="step">2</span>Result</h3>
+            </div>
+
+            <div class="result-empty" id="result-empty">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+              <strong>Your result appears here</strong>
+              <p>Takes about 20 seconds. Nothing you paste is stored.</p>
+            </div>
+
+            <div class="result-loading hidden" id="result-loading">
+              <div class="score-row">
+                <div class="ring-ph"></div>
+                <div style="display:grid;gap:10px">
+                  <div class="bar" style="width:70%"></div>
+                  <div class="bar" style="width:45%"></div>
+                </div>
+              </div>
+              <div class="bar" style="width:92%"></div>
+              <div class="bar" style="width:84%"></div>
+              <div class="bar" style="width:60%"></div>
+              <div class="loading-status"><span class="spinner" aria-hidden="true"></span><span id="loading-text">Reading the job description…</span></div>
+            </div>
+
+            <div class="match-error hidden" id="match-error" role="alert"></div>
+
+            <div class="hidden" id="result-body" style="display:flex;flex-direction:column;gap:18px">
+              <div class="score-row">
+                <div class="score-ring-wrap">
+                  <svg class="score-ring" viewBox="0 0 100 100" aria-hidden="true">
+                    <circle class="score-ring-track" cx="50" cy="50" r="42"/>
+                    <circle class="score-ring-fill" id="score-ring-fill" cx="50" cy="50" r="42"/>
+                  </svg>
+                  <div class="score-overlay"><span><span id="score-number">0</span><small>%</small></span></div>
+                </div>
+                <div>
+                  <div class="verdict" id="verdict">—</div>
+                  <div class="verdict-sub">Match score from Claude</div>
+                </div>
+              </div>
+
+              <div class="result-tabs" role="tablist" aria-label="Result details">
+                <button type="button" role="tab" id="tab-fit" aria-selected="true" aria-controls="pane-fit">Fit breakdown</button>
+                <button type="button" role="tab" id="tab-letter" aria-selected="false" aria-controls="pane-letter" tabindex="-1">Cover letter</button>
+              </div>
+
+              <div role="tabpanel" id="pane-fit" aria-labelledby="tab-fit" class="fit-list"></div>
+
+              <div role="tabpanel" id="pane-letter" aria-labelledby="tab-letter" hidden>
+                <div class="letter" id="cover-letter"></div>
+                <div class="letter-actions" style="margin-top:12px">
+                  <button type="button" class="btn btn-primary btn-sm" id="copy-letter">Copy letter</button>
+                  <button type="button" class="btn btn-ghost btn-sm" id="download-letter">Download .txt</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="match-foot">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          Runs on Claude through a private proxy. Limited to 3 analyses per visit.
+        </p>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section contact" id="contact">
+      <div class="container contact-grid">
+        <div class="reveal">
+          <span class="eyebrow">Contact</span>
+          <h2 class="display" style="margin-top:14px">Let's <em>talk.</em></h2>
+          <p class="contact-lede">Hiring for an engineering leadership role, or working on EV/ADAS test? Email is the fastest way to reach me.</p>
+          <div class="email-row">
+            <a class="email-link" href="mailto:cheewei.1988@gmail.com">cheewei.1988@gmail.com</a>
+            <button type="button" class="btn btn-ghost btn-sm" id="copy-email">Copy</button>
+          </div>
+        </div>
+        <div class="contact-list reveal">
+          <a class="contact-item" href="https://linkedin.com/in/jacky-liu-chee-wei" target="_blank" rel="noopener">
+            <span class="ic" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></span>
+            <span><strong>LinkedIn</strong><span>in/jacky-liu-chee-wei</span></span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg>
+          </a>
+          <a class="contact-item" href="https://github.com/cheewliu" target="_blank" rel="noopener">
+            <span class="ic" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2.1c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.9 1.2 1.9 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.6 18.3 5 18.3 5c.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .5z"/></svg></span>
+            <span><strong>GitHub</strong><span>github.com/cheewliu</span></span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg>
+          </a>
+          <a class="contact-item" href="resume.html">
+            <span class="ic" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h5"/></svg></span>
+            <span><strong>Résumé</strong><span>View online or download PDF</span></span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <span>© 2026 Liu Chee Wei (Jacky) · Penang, Malaysia</span>
+      <span>Plain HTML, CSS &amp; JS · <a href="https://github.com/cheewliu/cheewliu.github.io" target="_blank" rel="noopener">Source</a> · Updated October 2026</span>
+    </div>
   </footer>
 
-  <!-- Floating AI Match CTA -->
-  <a href="#ai-match" class="fab-match" id="fab-match" aria-label="Jump to AI Match CV tool">&#9889; Match My CV</a>
-
-  <!-- Back to top -->
-  <button class="back-to-top hidden" id="back-to-top" aria-label="Back to top">
+  <button class="to-top" id="to-top" type="button" aria-label="Back to top">
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
   </button>
 
-  <!-- Toast notification -->
-  <div class="toast hidden" id="toast" role="status" aria-live="polite"></div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
   <script src="script.js"></script>
 </body>

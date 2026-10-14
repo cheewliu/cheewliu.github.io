@@ -8,18 +8,18 @@ Personal portfolio site for Liu Chee Wei (Jacky) — R&D Software Manager specia
 
 ## Features
 
-- **AI Skills Summary** — Claude generates a concise professional bio on page load, cached in `sessionStorage`
-- **AI Recruiter Tool** — paste any job description to get an instant resume match score (animated ring meter) + tailored cover letter, generated in a single API call
+- **AI Summary** — Claude writes a short professional bio when the About section comes into view, cached in `sessionStorage`
+- **AI Match** — paste any job description (or try a sample) to get a match score, strengths, gaps and a tailored cover letter in one structured API call
 - **GitHub Projects** — live repo grid fetched from the GitHub API
 - **Inline Resume** — styled HTML resume with PDF download via browser print
-- **Dark developer aesthetic** — monospace accents, grid background, typewriter animations
+- **Editorial design** — Fraunces + Geist type, warm paper palette, light/dark themes that follow the OS, fully responsive
 
 ## Tech
 
 | Layer | Stack |
 |---|---|
 | Frontend | Plain HTML, CSS, JS — no frameworks |
-| AI | Claude API (`claude-sonnet-4-20250514`) |
+| AI | Claude API (`claude-opus-5-5`) |
 | Proxy | Cloudflare Worker (rate-limited, CORS-scoped) |
 | Hosting | GitHub Pages |
 

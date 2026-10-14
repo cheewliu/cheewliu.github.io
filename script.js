@@ -1,223 +1,218 @@
 /* =========================================================
-   CONFIG — update these before going live
+   CONFIG
    ========================================================= */
 const GITHUB_USERNAME = 'cheewliu';
 
-// Featured repos — leave empty array [] to show all (filtered).
+// Featured repos — leave empty [] to show all (filtered).
 // Add repo names here to pin specific ones in this exact order.
-const GITHUB_PINNED = []; // e.g. ['cheewliu.github.io', 'opentap-helper']
+const GITHUB_PINNED = [];
 
 // Max repos to display after filtering
 const GITHUB_MAX_REPOS = 6;
 
 // Cloudflare Worker proxy — API key lives in Cloudflare secrets, never here
 const CLAUDE_PROXY = 'https://jacky-portfolio-proxy.cheewei-1988.workers.dev';
-const CLAUDE_MODEL = 'claude-sonnet-4-20250514';
+const CLAUDE_MODEL = 'claude-opus-5-5';
+
+const $ = (sel, root = document) => root.querySelector(sel);
+const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 /* =========================================================
-   NAVBAR — sticky scroll + active link + mobile toggle
+   STORAGE — sessionStorage/localStorage can throw (private mode)
    ========================================================= */
-const navbar     = document.getElementById('navbar');
-const navLinks   = document.querySelectorAll('.nav-links a');
-const hamburger  = document.getElementById('hamburger');
-const navList    = document.querySelector('.nav-links');
-
-window.addEventListener('scroll', () => {
-  navbar.classList.toggle('scrolled', window.scrollY > 20);
-  highlightActiveSection();
-  updateFab();
-}, { passive: true });
-
-function updateFab() {
-  const fab     = document.getElementById('fab-match');
-  const section = document.getElementById('ai-match');
-  if (!fab || !section) return;
-  const rect = section.getBoundingClientRect();
-  // Hide when ai-match is visible in the viewport
-  const inView = rect.top < window.innerHeight && rect.bottom > 0;
-  fab.classList.toggle('hidden', inView);
-}
-
-hamburger.addEventListener('click', () => {
-  navList.classList.toggle('open');
-});
-
-// Close mobile menu on link click
-navList.querySelectorAll('a').forEach(link => {
-  link.addEventListener('click', () => navList.classList.remove('open'));
-});
-
-function highlightActiveSection() {
-  const sections = document.querySelectorAll('section[id]');
-  let current = '';
-  sections.forEach(sec => {
-    if (window.scrollY >= sec.offsetTop - 100) current = sec.id;
-  });
-  navLinks.forEach(link => {
-    link.classList.toggle('active', link.getAttribute('href') === `#${current}`);
-  });
-}
+const store = {
+  get(area, key) { try { return window[area].getItem(key); } catch (_) { return null; } },
+  set(area, key, val) { try { window[area].setItem(key, val); } catch (_) {} },
+  del(area, key) { try { window[area].removeItem(key); } catch (_) {} },
+};
 
 /* =========================================================
-   DARK / LIGHT MODE TOGGLE
+   NAV — scrolled state, active section, mobile menu
    ========================================================= */
-const themeToggle  = document.getElementById('theme-toggle');
-const iconMoon     = document.getElementById('theme-icon-moon');
-const iconSun      = document.getElementById('theme-icon-sun');
+const nav     = $('#nav');
+const menuBtn = $('#menu-btn');
+const navList = $('#nav-links');
 
-function applyTheme(light) {
-  document.body.classList.toggle('light-mode', light);
-  if (iconMoon && iconSun) {
-    iconMoon.classList.toggle('hidden', light);
-    iconSun.classList.toggle('hidden', !light);
+function setMenu(open) {
+  navList.classList.toggle('open', open);
+  nav.classList.toggle('menu-open', open);
+  menuBtn.setAttribute('aria-expanded', String(open));
+  menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+}
+
+menuBtn.addEventListener('click', () => setMenu(!navList.classList.contains('open')));
+$$('a', navList).forEach(a => a.addEventListener('click', () => setMenu(false)));
+document.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
+document.addEventListener('click', e => {
+  if (navList.classList.contains('open') && !nav.contains(e.target)) setMenu(false);
+});
+
+const toTop = $('#to-top');
+function onScroll() {
+  const y = window.scrollY;
+  nav.classList.toggle('scrolled', y > 8);
+  toTop.classList.toggle('visible', y > 900);
+}
+window.addEventListener('scroll', onScroll, { passive: true });
+onScroll();
+toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' }));
+
+// Highlight the nav link for the section in the middle of the viewport
+const navLinkById = Object.fromEntries(
+  $$('a', navList).map(a => [a.getAttribute('href').slice(1), a])
+);
+const sectionObserver = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    $$('a', navList).forEach(a => a.classList.remove('active'));
+    const link = navLinkById[e.target.id];
+    if (link) link.classList.add('active');
+  });
+}, { rootMargin: '-45% 0px -50% 0px' });
+$$('main section[id]').forEach(s => sectionObserver.observe(s));
+
+/* =========================================================
+   THEME — initial value set inline in <head>
+   ========================================================= */
+$('#theme-toggle').addEventListener('click', () => {
+  const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  store.set('localStorage', 'theme', next);
+});
+
+/* =========================================================
+   REVEAL ON SCROLL
+   ========================================================= */
+const revealObserver = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    e.target.classList.add('in');
+    revealObserver.unobserve(e.target);
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+function observeReveal(els) {
+  els.forEach((el, i) => {
+    if (reduceMotion) { el.classList.add('in'); return; }
+    // Stagger siblings that enter together
+    el.style.transitionDelay = `${Math.min(i % 4, 3) * 70}ms`;
+    revealObserver.observe(el);
+  });
+}
+observeReveal($$('.reveal'));
+
+/* =========================================================
+   TOAST
+   ========================================================= */
+let toastTimer;
+function showToast(msg, ms = 2000) {
+  const toast = $('#toast');
+  toast.textContent = msg;
+  toast.classList.add('visible');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toast.classList.remove('visible'), ms);
+}
+
+async function copyText(text) {
+  try {
+    await navigator.clipboard.writeText(text);
+    return true;
+  } catch (_) {
+    // Fallback for browsers that block the async clipboard API
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.setAttribute('readonly', '');
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    let ok = false;
+    try { ok = document.execCommand('copy'); } catch (_) {}
+    ta.remove();
+    return ok;
   }
 }
 
-// Restore saved preference
-applyTheme(localStorage.getItem('theme') === 'light');
-
-themeToggle.addEventListener('click', () => {
-  const isLight = !document.body.classList.contains('light-mode');
-  applyTheme(isLight);
-  localStorage.setItem('theme', isLight ? 'light' : 'dark');
+$('#copy-email').addEventListener('click', async () => {
+  const ok = await copyText('cheewei.1988@gmail.com');
+  showToast(ok ? 'Email copied' : 'Copy failed — select the address instead');
 });
 
-/* =========================================================
-   SCROLL ANIMATIONS
-   ========================================================= */
-// Fade-up: sections, cards, panels
-const fadeEls = document.querySelectorAll(
-  '.timeline-item, .project-card, .skill-category, .contact-card, ' +
-  '.about-text, .resume-cta, .recruiter-tool, .certs-card, .patents-card, .featured-card'
-);
-fadeEls.forEach(el => el.classList.add('fade-in'));
-
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (!e.isIntersecting) return;
-    // Stagger timeline items by their index
-    if (e.target.classList.contains('timeline-item')) {
-      const siblings = [...document.querySelectorAll('.timeline-item')];
-      const delay = siblings.indexOf(e.target) * 100;
-      setTimeout(() => e.target.classList.add('visible'), delay);
-    } else {
-      e.target.classList.add('visible');
-    }
-    observer.unobserve(e.target);
-  });
-}, { threshold: 0.08 });
-
-fadeEls.forEach(el => observer.observe(el));
-
-// Section headers slide in
-const headerObserver = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (!e.isIntersecting) return;
-    e.target.classList.add('visible');
-    headerObserver.unobserve(e.target);
-  });
-}, { threshold: 0.2 });
-
-document.querySelectorAll('.section-header').forEach(el => headerObserver.observe(el));
-
-// Skill tags scale-pop with stagger
-const tagObserver = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (!e.isIntersecting) return;
-    const tags = e.target.querySelectorAll('.tag');
-    tags.forEach((tag, i) => setTimeout(() => tag.classList.add('visible'), i * 40));
-    tagObserver.unobserve(e.target);
-  });
-}, { threshold: 0.2 });
-
-document.querySelectorAll('.skill-category, .timeline-tags').forEach(el => tagObserver.observe(el));
+function escHtml(str) {
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
 
 /* =========================================================
-   GITHUB PROJECTS — dynamic repo fetch
+   GITHUB PROJECTS
    ========================================================= */
-const GITHUB_CACHE_KEY = 'gh_repos_v1';
+const GITHUB_CACHE_KEY = 'gh_repos_v2';
 const GITHUB_CACHE_TTL = 10 * 60 * 1000; // 10 minutes
 
 async function fetchGitHubProjects() {
-  const grid    = document.getElementById('projects-grid');
-  const loading = document.getElementById('projects-loading');
-  const errorEl = document.getElementById('projects-error');
+  const grid    = $('#projects-grid');
+  const errorEl = $('#projects-error');
 
-  // Update placeholder links
-  document.querySelectorAll('a[href*="GITHUB_USERNAME"]').forEach(a => {
-    a.href = a.href.replace('GITHUB_USERNAME', GITHUB_USERNAME);
-  });
-  document.querySelectorAll('.projects-meta .accent').forEach(el => {
-    if (el.textContent === 'GITHUB_USERNAME') el.textContent = GITHUB_USERNAME;
-  });
-
-  if (GITHUB_USERNAME === 'GITHUB_USERNAME') {
-    loading.innerHTML = `<span class="accent monospace">// Set GITHUB_USERNAME in script.js to load repos</span>`;
+  const cached = JSON.parse(store.get('sessionStorage', GITHUB_CACHE_KEY) || 'null');
+  if (cached && Date.now() - cached.ts < GITHUB_CACHE_TTL) {
+    renderRepos(cached.repos, grid);
     return;
   }
-
-  // Return cached repos if still fresh
-  try {
-    const cached = JSON.parse(sessionStorage.getItem(GITHUB_CACHE_KEY) || 'null');
-    if (cached && Date.now() - cached.ts < GITHUB_CACHE_TTL) {
-      renderRepos(cached.repos, grid, loading);
-      return;
-    }
-  } catch (_) {}
 
   try {
     let repos = null;
 
     // 1st attempt: Worker proxy (authenticated — 5000 req/hr)
     try {
-      const res = await fetch(
-        `${CLAUDE_PROXY}/github?user=${GITHUB_USERNAME}&per_page=12`
-      );
+      const res = await fetch(`${CLAUDE_PROXY}/github?user=${GITHUB_USERNAME}&per_page=12`);
       if (res.ok) repos = await res.json();
     } catch (_) {}
 
-    // 2nd attempt: Direct GitHub API (unauthenticated — 60 req/hr per IP)
-    if (!repos) {
-      const res = await fetch(
-        `https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=12&type=public`
-      );
+    // 2nd attempt: direct GitHub API (unauthenticated — 60 req/hr per IP)
+    if (!Array.isArray(repos)) {
+      const res = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=12&type=public`);
       if (!res.ok) throw new Error(`GitHub API ${res.status}`);
       repos = await res.json();
     }
 
-    // Cache successful result
-    try {
-      sessionStorage.setItem(GITHUB_CACHE_KEY, JSON.stringify({ ts: Date.now(), repos }));
-    } catch (_) {}
-
-    renderRepos(repos, grid, loading);
-
+    store.set('sessionStorage', GITHUB_CACHE_KEY, JSON.stringify({ ts: Date.now(), repos }));
+    renderRepos(repos, grid);
   } catch (err) {
     console.error('GitHub fetch error:', err);
-    loading.remove();
+    grid.innerHTML = '';
+    grid.setAttribute('aria-busy', 'false');
     errorEl.classList.remove('hidden');
   }
 }
 
-function retryGitHub() {
-  const errorEl = document.getElementById('projects-error');
-  const grid    = document.getElementById('projects-grid');
-  errorEl.classList.add('hidden');
-  // Re-inject loading placeholder then fetch
-  grid.innerHTML = `
-    <div class="projects-loading" id="projects-loading">
-      <span class="accent monospace">$ git fetch --all</span><br />
-      <span class="t-output">Loading repositories...</span>
-    </div>`;
-  sessionStorage.removeItem(GITHUB_CACHE_KEY);
+$('#projects-retry').addEventListener('click', () => {
+  $('#projects-error').classList.add('hidden');
+  const grid = $('#projects-grid');
+  grid.setAttribute('aria-busy', 'true');
+  grid.innerHTML = '<div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div>';
+  store.del('sessionStorage', GITHUB_CACHE_KEY);
   fetchGitHubProjects();
+});
+
+function timeAgo(iso) {
+  const days = Math.floor((Date.now() - new Date(iso)) / 86400000);
+  if (days < 1) return 'today';
+  if (days < 30) return `${days}d ago`;
+  const months = Math.floor(days / 30);
+  if (months < 12) return `${months}mo ago`;
+  return `${Math.floor(months / 12)}y ago`;
 }
 
-function renderRepos(repos, grid, loading) {
-  loading.remove();
+function renderRepos(repos, grid) {
+  grid.innerHTML = '';
+  grid.setAttribute('aria-busy', 'false');
 
-  // Filter + curate: pinned takes priority, otherwise drop forks/archived,
-  // sort by stars then recent push, cap at GITHUB_MAX_REPOS.
+  // Pinned takes priority; otherwise drop forks/archived,
+  // sort by stars then most recent push, cap at GITHUB_MAX_REPOS.
   let curated;
   if (GITHUB_PINNED.length) {
     const byName = Object.fromEntries(repos.map(r => [r.name, r]));
@@ -231,61 +226,76 @@ function renderRepos(repos, grid, loading) {
   }
 
   if (!curated.length) {
-    grid.innerHTML = `<p class="projects-loading">No public repositories found.</p>`;
+    grid.innerHTML = '<p class="notice">No public repositories yet.</p>';
     return;
   }
-  curated.forEach(repo => {
+
+  const cards = curated.map(repo => {
     const card = document.createElement('a');
-    card.className = 'project-card fade-in';
+    card.className = 'project reveal';
     card.href      = repo.html_url;
     card.target    = '_blank';
     card.rel       = 'noopener';
     card.innerHTML = `
-      <div class="project-card-header">
-        <span class="project-icon">&#128193;</span>
+      <div class="project-top">
         <span class="project-name">${escHtml(repo.name)}</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg>
       </div>
-      <p class="project-desc">${escHtml(repo.description || 'No description.')}</p>
-      <div class="project-footer">
-        ${repo.language ? `<span class="project-lang">${escHtml(repo.language)}</span>` : ''}
-        <span>&#9733; ${repo.stargazers_count}</span>
-        <span>&#8508; ${repo.forks_count}</span>
-      </div>
-    `;
+      <p class="project-desc">${escHtml(repo.description || 'No description yet.')}</p>
+      <div class="project-meta">
+        ${repo.language ? `<span class="lang">${escHtml(repo.language)}</span>` : ''}
+        ${repo.stargazers_count ? `<span>★ ${repo.stargazers_count}</span>` : ''}
+        <span>Updated ${timeAgo(repo.pushed_at)}</span>
+      </div>`;
     grid.appendChild(card);
-    observer.observe(card);
-    setTimeout(() => card.classList.add('visible'), 50);
+    return card;
   });
-}
-
-function escHtml(str) {
-  return String(str)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;');
+  observeReveal(cards);
 }
 
 /* =========================================================
-   TYPEWRITER — types text into el char by char, returns Promise
+   CLAUDE — shared call through the Worker proxy
    ========================================================= */
-function typewriter(el, text, speed = 22) {
+async function callClaude(body) {
+  const res = await fetch(CLAUDE_PROXY, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ model: CLAUDE_MODEL, ...body }),
+  });
+  if (res.status === 429) throw Object.assign(new Error('rate'), { kind: 'rate' });
+  if (!res.ok) throw new Error(`Claude API ${res.status}`);
+
+  const data = await res.json();
+  if (data.stop_reason === 'refusal') throw new Error('Claude declined the request');
+
+  // Opus 5.5 always thinks, so the response can start with thinking blocks —
+  // read only the text blocks.
+  const text = (data.content || [])
+    .filter(b => b.type === 'text')
+    .map(b => b.text)
+    .join('')
+    .trim();
+  if (!text) throw new Error('Empty response');
+  return text;
+}
+
+/* =========================================================
+   TYPEWRITER — types text into el, returns Promise
+   ========================================================= */
+function typewriter(el, text, speed = 16) {
+  if (reduceMotion) { el.textContent = text; return Promise.resolve(); }
   return new Promise(resolve => {
-    el.innerHTML = '';
-
-    // Inline blinking cursor appended at the end while typing
+    el.textContent = '';
     const cursor = document.createElement('span');
-    cursor.className = 'ai-type-cursor';
-    cursor.textContent = '▊';
+    cursor.className = 'type-cursor';
     el.appendChild(cursor);
-
     let i = 0;
     const tick = setInterval(() => {
       if (i < text.length) {
         cursor.insertAdjacentText('beforebegin', text[i++]);
       } else {
         clearInterval(tick);
-        cursor.classList.add('done'); // stop blinking, fade out
+        cursor.classList.add('done');
         resolve();
       }
     }, speed);
@@ -293,102 +303,86 @@ function typewriter(el, text, speed = 22) {
 }
 
 /* =========================================================
-   CLAUDE AI SUMMARY — generates on load, cached in sessionStorage
+   AI SUMMARY — generated once per session when About scrolls in
    ========================================================= */
+const BIO_CACHE_KEY = 'ai_summary_v2';
+
 async function loadAISummary() {
-  const block  = document.getElementById('ai-summary');
-  const bodyEl = document.getElementById('ai-summary-body');
-  const CACHE_KEY = 'ai_summary_v1';
+  const bodyEl = $('#ai-bio-body');
 
-  // Serve from cache — render immediately, no typewriter delay on repeat visits
-  const cached = sessionStorage.getItem(CACHE_KEY);
-  if (cached) {
-    bodyEl.textContent = cached;
-    return;
-  }
+  const cached = store.get('sessionStorage', BIO_CACHE_KEY);
+  if (cached) { bodyEl.textContent = cached; return; }
 
-  const prompt = `Write a concise 2-3 sentence professional summary for a software portfolio website.
-Person: Liu Chee Wei (Jacky), R&D Software Architect, Penang, Malaysia.
-Tech stack: C#, WPF, C++, OpenTAP, PTEM, Python, SECS/GEM, Test Automation, Software Architecture, Agile, Scrum, LiDAR/ADAS, EV Manufacturing Testing.
-Rules: third person, specific about tech and domain, under 65 words, no filler phrases.`;
+  const prompt = `Write a 2-sentence professional summary for a portfolio website.
+Person: Liu Chee Wei (Jacky), R&D Software Manager at Keysight Technologies, Penang, Malaysia (promoted Sep 2026 from R&D Software Lead Engineer).
+Facts: manages a 10-engineer team building PTEM on OpenTAP for global EV/ADAS test automation; previously architected PTEM and was Scrum Master; sole software developer on the Keysight E8717A LiDAR Target Simulator and co-inventor of 2 US patents; 15 years across Keysight, WAFTECH (semiconductor equipment, C#/WPF, SECS/GEM) and co-founding a 3D printing startup; C#, C++, Python.
+Rules: third person, specific, under 55 words, plain text only, no filler or superlatives.`;
 
   try {
-    const res = await fetch(CLAUDE_PROXY, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: CLAUDE_MODEL,
-        max_tokens: 150,
-        messages: [{ role: 'user', content: prompt }],
-      }),
+    const summary = await callClaude({
+      max_tokens: 2000,
+      output_config: { effort: 'low' },
+      messages: [{ role: 'user', content: prompt }],
     });
-
-    if (!res.ok) throw new Error(`Claude API ${res.status}`);
-    const data = await res.json();
-    const summary = data.content[0].text.trim();
-
-    sessionStorage.setItem(CACHE_KEY, summary);
+    store.set('sessionStorage', BIO_CACHE_KEY, summary);
     await typewriter(bodyEl, summary);
-
   } catch (err) {
-    // Graceful fallback: render the static bio embedded in data-fallback,
-    // swap the badge label so it doesn't claim AI output it didn't generate.
-    const fallback = bodyEl.getAttribute('data-fallback');
-    if (fallback) {
-      bodyEl.textContent = fallback;
-      const badge = document.getElementById('ai-summary-badge');
-      if (badge) badge.textContent = '✦ Profile summary';
-    } else {
-      block.style.display = 'none';
-    }
+    // Fallback to the static bio, and don't claim AI wrote it
+    bodyEl.textContent = bodyEl.getAttribute('data-fallback');
+    $('#ai-bio-badge').textContent = 'Summary';
   }
 }
 
+// Only call the API when the reader actually reaches the About section
+const bioObserver = new IntersectionObserver(entries => {
+  if (!entries[0].isIntersecting) return;
+  bioObserver.disconnect();
+  loadAISummary();
+}, { rootMargin: '200px 0px' });
+bioObserver.observe($('#ai-bio'));
+
 /* =========================================================
-   RECRUITER AI TOOL
+   AI MATCH — score + strengths/gaps + cover letter
    ========================================================= */
 const RESUME_TEXT = `Liu Chee Wei (Jacky) | R&D Software Manager | Penang, Malaysia
 linkedin.com/in/jacky-liu-chee-wei | github.com/cheewliu | cheewei.1988@gmail.com
 
 SUMMARY
-R&D software manager and architect with 13+ years across automotive test automation, semiconductor equipment, and entrepreneurship. At Keysight Technologies, manages the R&D software team behind PTEM after leading its architecture on OpenTAP for global EV/ADAS programs and co-invented two US-patented LiDAR simulation systems.
+R&D Software Manager at Keysight Technologies leading a 10-engineer team that builds PTEM on OpenTAP for global EV/ADAS test automation programs. 15 years across automotive test automation, semiconductor equipment software and a startup. Previously architected PTEM as lead engineer; sole software developer on the Keysight E8717A LiDAR Target Simulator and co-inventor of two US patents. Hands-on in C#, C++ and Python; applies AI where it gives real engineering leverage.
 
 SKILLS
+Leadership: Engineering management, hiring and coaching, roadmapping, Scrum Master, Agile delivery, release process
 Languages: C#, WPF, C++, Python, JavaScript, PowerShell
-Frameworks & Tools: OpenTAP, PTEM, .NET, Git, Cloudflare Workers, Claude API
-Domain: EV/ADAS, LiDAR, HIL Testing, SECS/GEM, Automotive SPICE, EV Manufacturing Testing
-Leadership: Scrum Master, Software Architecture, Agile, Test Automation
+Platforms & Tools: OpenTAP, PTEM, .NET, Git, Cloudflare Workers, Claude API
+Domain: EV/ADAS, LiDAR, HIL Testing, CAN/LIN, SECS/GEM, Automotive SPICE, EV Manufacturing Testing
 
 EXPERIENCE
 R&D Software Manager | Keysight Technologies Malaysia | Sep 2026 – Present
-- Manage an R&D software team of 10 engineers delivering PTEM on OpenTAP for global EV/ADAS test automation programs
-- Own team roadmap, delivery planning, and stakeholder alignment across global automotive programs
-- Drive hiring, performance reviews, and career development for the engineering team
+- Manage a 10-engineer R&D software team delivering PTEM on OpenTAP for global EV/ADAS test automation programs
+- Own team roadmap, delivery planning and stakeholder alignment across global automotive programs
+- Hire, coach and develop engineers; run performance reviews and career growth plans
 
 R&D Software Lead Engineer | Keysight Technologies Malaysia | Oct 2019 – Aug 2026
-- Led a team of 10 engineers on PTEM architecture and development, built on OpenTAP for global EV/ADAS test automation programs
-- Served as Scrum Master; established SQ release process across global automotive programs
-- Main developer on the LiDAR Target Simulator project; co-invented 2 US patents within 2 years as part of a 4-engineer team; productized as Keysight E8717A
+- Led a team of 10 on PTEM architecture and development, built on OpenTAP, for global EV/ADAS test automation programs
+- Scrum Master; established the SQ release process across global automotive programs
+- Sole software developer on the 4-engineer LiDAR Target Simulator team; co-invented 2 US patents in 2 years; productized as Keysight E8717A
 
 Motion Control & Software Dev Senior Engineer | WAFTECH | Apr 2016 – Sep 2019
-- Built next-gen machine control software using C# and WPF
+- Built next-generation machine control software in C# and WPF
 - Implemented SECS/GEM integration for semiconductor equipment communication
 - Led on-site deployments and mentored junior engineers
 
 Co-Founder | Makerzone Sdn Bhd | Apr 2011 – Mar 2016
-- Founded a 3D printing service business from the ground up
-- Built and managed the company marketing website
+- Co-founded and ran a 3D printing service business; built the company website; delivered customer projects end to end
 
 Machine Automation Software Engineer | WAFTECH | Oct 2014 – Apr 2015
 - Developed motion control and wafer handling software in C# and WPF
 
 R&D System Engineer | Keysight Technologies Malaysia | Jun 2011 – Oct 2014
-- Developed automotive test systems using C++
-- Supported TS-5000 hardware handler library
+- Developed automotive test systems in C++; supported the TS-5000 hardware handler library
 
 EDUCATION
-Bachelor of Engineering (Hons), Electrical & Electronic Engineering
-Universiti Tunku Abdul Rahman (UTAR), 2007 – 2011
+Bachelor of Engineering (Hons), Electrical & Electronic Engineering — Universiti Tunku Abdul Rahman (UTAR), 2007 – 2011
 
 CERTIFICATIONS
 Agile SCRUM for Practitioners — DreamCatcher Consulting, Feb 2026
@@ -398,242 +392,259 @@ PATENTS
 US20220260714A1 — Automated LiDAR Target Simulation Scanning Systems & Methods
 US20230132855A1 — Automated LiDAR Target Simulation Scanning Systems and Methods`;
 
+const SAMPLE_JDS = {
+  manager: `Engineering Manager, Test Automation Platform
+
+We're hiring an Engineering Manager to lead a team of 8–12 software engineers building our test automation platform for electric vehicle and ADAS validation.
+
+Responsibilities
+- Lead, hire and grow a team of software engineers; run 1:1s, performance reviews and career development
+- Own the roadmap and delivery for the test platform, working with product, hardware and customer teams worldwide
+- Keep the architecture healthy as the platform scales; make build-vs-buy calls
+- Drive Agile delivery and a reliable release process
+
+Requirements
+- 10+ years in software engineering, 2+ years leading engineers
+- Strong background in C# / .NET or C++; Python a plus
+- Experience with automotive test systems, HIL, or instrument automation
+- Excellent communication with global stakeholders`,
+  architect: `Senior Test Automation Architect — ADAS Sensors
+
+Design the software architecture for our next-generation ADAS sensor test systems (LiDAR, radar, camera).
+
+You will
+- Define the architecture for a modular, plugin-based test sequencing framework
+- Build instrument drivers and integrate HIL setups
+- Set coding standards and review designs across three teams
+- Prototype ML-assisted test analysis
+
+You have
+- 8+ years building test automation or instrument control software
+- Expert C#; C++ and Python
+- Experience with OpenTAP, TestStand or similar sequencers
+- Knowledge of LiDAR or radar test methods; patents a plus
+- Automotive SPICE / ISO 26262 exposure`,
+};
+
+const MATCH_SCHEMA = {
+  type: 'object',
+  properties: {
+    score:       { type: 'integer' },
+    verdict:     { type: 'string' },
+    strengths:   { type: 'array', items: { type: 'string' } },
+    gaps:        { type: 'array', items: { type: 'string' } },
+    coverLetter: { type: 'string' },
+  },
+  required: ['score', 'verdict', 'strengths', 'gaps', 'coverLetter'],
+  additionalProperties: false,
+};
+
 const MAX_ANALYSES = 3;
 const RATE_KEY     = 'recruiter_uses';
+const JD_MAX       = 3000;
 
-// Character counter wired up in INIT block below
+const jdInput    = $('#jd-input');
+const analyzeBtn = $('#analyze-btn');
+
+function usesSoFar() { return parseInt(store.get('sessionStorage', RATE_KEY) || '0', 10); }
 
 function updateRateDisplay() {
-  const uses      = parseInt(sessionStorage.getItem(RATE_KEY) || '0');
-  const remaining = Math.max(0, MAX_ANALYSES - uses);
-  const el        = document.getElementById('jd-rate-display');
-  const btn       = document.getElementById('analyze-btn');
-  if (el) {
-    el.textContent = `${remaining} / ${MAX_ANALYSES} analyses remaining this session`;
-    el.classList.toggle('depleted', remaining === 0);
-  }
-  if (btn && uses >= MAX_ANALYSES) {
-    btn.disabled = true;
-    document.getElementById('recruiter-rate-msg').classList.remove('hidden');
-  }
+  const remaining = Math.max(0, MAX_ANALYSES - usesSoFar());
+  const el = $('#jd-rate');
+  el.textContent = remaining ? `${remaining} of ${MAX_ANALYSES} left` : 'No analyses left this visit';
+  el.classList.toggle('depleted', remaining === 0);
+  analyzeBtn.disabled = remaining === 0;
 }
 
-async function analyzeJobFit() {
-  const jdInput = document.getElementById('jd-input');
-  const jd      = jdInput ? jdInput.value.trim() : '';
-  if (!jd) { jdInput && jdInput.focus(); return; }
+function updateCounter() {
+  const len = jdInput.value.length;
+  const counter = $('#jd-counter');
+  counter.textContent = `${len} / ${JD_MAX}`;
+  counter.classList.toggle('warn', len > JD_MAX - 500);
+}
 
-  const uses = parseInt(sessionStorage.getItem(RATE_KEY) || '0');
-  if (uses >= MAX_ANALYSES) {
-    document.getElementById('recruiter-rate-msg').classList.remove('hidden');
+jdInput.addEventListener('input', updateCounter);
+jdInput.addEventListener('keydown', e => {
+  if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) {
+    e.preventDefault();
+    $('#match-form').requestSubmit();
+  }
+});
+
+$$('.sample-btn').forEach(btn => btn.addEventListener('click', () => {
+  jdInput.value = SAMPLE_JDS[btn.dataset.sample];
+  updateCounter();
+  jdInput.focus();
+  jdInput.setSelectionRange(0, 0);
+  jdInput.scrollTop = 0;
+}));
+
+function showResultState(state) {
+  $('#result-empty').classList.toggle('hidden', state !== 'empty');
+  $('#result-loading').classList.toggle('hidden', state !== 'loading');
+  $('#result-body').classList.toggle('hidden', state !== 'done');
+  $('#match-error').classList.toggle('hidden', state !== 'error');
+}
+
+let loadingTimer;
+function cycleLoadingText() {
+  const steps = [
+    'Reading the job description…',
+    'Comparing against 15 years of experience…',
+    'Weighing strengths and gaps…',
+    'Drafting the cover letter…',
+  ];
+  let i = 0;
+  $('#loading-text').textContent = steps[0];
+  clearInterval(loadingTimer);
+  loadingTimer = setInterval(() => {
+    i = Math.min(i + 1, steps.length - 1);
+    $('#loading-text').textContent = steps[i];
+  }, 5000);
+}
+
+$('#match-form').addEventListener('submit', async e => {
+  e.preventDefault();
+  const jd = jdInput.value.trim();
+  if (jd.length < 80) {
+    showResultState('error');
+    $('#match-error').textContent = 'Paste a fuller job description (at least a few lines) for a useful result.';
+    jdInput.focus();
     return;
   }
+  if (usesSoFar() >= MAX_ANALYSES) { updateRateDisplay(); return; }
 
-  const loadingEl = document.getElementById('recruiter-loading');
-  const resultsEl = document.getElementById('recruiter-results');
-  const errorEl   = document.getElementById('recruiter-error');
-  const btn       = document.getElementById('analyze-btn');
+  showResultState('loading');
+  cycleLoadingText();
+  analyzeBtn.disabled = true;
+  const label = $('span', analyzeBtn);
+  label.textContent = 'Analyzing…';
+  if (window.matchMedia('(max-width: 920px)').matches) {
+    $('#result-panel').scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+  }
 
-  loadingEl.classList.remove('hidden');
-  resultsEl.classList.add('hidden');
-  errorEl.classList.add('hidden');
-  document.getElementById('recruiter-rate-msg').classList.add('hidden');
-  btn.disabled = true;
-  const btnOriginalText = btn.textContent;
-  btn.textContent = 'Analyzing…';
+  const prompt = `You are an experienced technical recruiter. Assess how well the candidate fits the job, then write a cover letter from the candidate.
 
-  const prompt = `You are an expert technical recruiter and career coach. Analyze the job description against the candidate's resume, then write a tailored cover letter.
-
-CANDIDATE RESUME:
+<resume>
 ${RESUME_TEXT}
+</resume>
 
-JOB DESCRIPTION:
+<job_description>
 ${jd}
+</job_description>
 
-Return ONLY a valid JSON object — no markdown fences, no extra text — with this exact structure:
-{
-  "match": {
-    "score": <integer 0-100, be honest and calibrated>,
-    "strengths": ["<specific strength 1>", "<specific strength 2>", "<specific strength 3>"],
-    "gaps": ["<gap 1>", "<optional gap 2>"]
-  },
-  "coverLetter": "<full cover letter, use \\n\\n to separate paragraphs. Confident, specific tone. Do not open with 'I am writing to apply'. Sign off as Liu Chee Wei (Jacky).>"
-}
-
-Score guide: 70+ = strong fit, 50-69 = moderate fit, below 50 = weak fit.
-Strengths: reference specific skills or experiences from the resume that match the JD.
-Gaps: be honest but constructive, max 2 items.
-Cover letter: address a specific role requirement in the opening, reference exact tech from both JD and resume.`;
+Fields:
+- score: integer 0-100, honest and calibrated (70+ strong fit, 50-69 moderate, below 50 weak). Don't inflate.
+- verdict: 3-6 word headline for the fit, e.g. "Strong fit for this role".
+- strengths: 3 specific matches between the resume and the job, each one sentence citing concrete experience.
+- gaps: 1-2 honest, constructive gaps. If there are no real gaps, name the closest thing to one.
+- coverLetter: 3-4 short paragraphs separated by blank lines. Open with the role's most important need, not "I am writing to apply". Reference concrete tech and experience from both documents. Confident and specific, no clichés. Sign off as "Liu Chee Wei (Jacky)".
+Use only facts from the resume; never invent experience.`;
 
   try {
-    const res = await fetch(CLAUDE_PROXY, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: CLAUDE_MODEL,
-        max_tokens: 1500,
-        messages: [{ role: 'user', content: prompt }],
-      }),
+    const text = await callClaude({
+      max_tokens: 8000,
+      output_config: {
+        effort: 'low',
+        format: { type: 'json_schema', schema: MATCH_SCHEMA },
+      },
+      messages: [{ role: 'user', content: prompt }],
     });
+    const result = JSON.parse(text.replace(/^```(?:json)?\s*/, '').replace(/\s*```$/, ''));
 
-    if (!res.ok) throw new Error(`API ${res.status}`);
-    const data    = await res.json();
-    const rawText = data.content[0].text.trim();
-
-    // Strip code fences if Claude wraps in them
-    const jsonStr = rawText.replace(/^```(?:json)?\n?/, '').replace(/\n?```$/, '');
-    const result  = JSON.parse(jsonStr);
-
-    sessionStorage.setItem(RATE_KEY, String(uses + 1));
-    updateRateDisplay();
-
-    renderMatchPanel(result.match);
-    renderCoverLetter(result.coverLetter);
-
-    loadingEl.classList.add('hidden');
-    resultsEl.classList.remove('hidden');
-    resultsEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    btn.textContent = btnOriginalText;
-    // Re-enable only if quota remains (updateRateDisplay disables at cap)
-    if (parseInt(sessionStorage.getItem(RATE_KEY) || '0') < MAX_ANALYSES) {
-      btn.disabled = false;
-    }
-
+    store.set('sessionStorage', RATE_KEY, String(usesSoFar() + 1));
+    renderMatch(result);
+    showResultState('done');
+    selectTab('fit');
   } catch (err) {
-    console.error('Recruiter tool error:', err);
-    loadingEl.classList.add('hidden');
-    errorEl.classList.remove('hidden');
-    btn.textContent = btnOriginalText;
-    btn.disabled = false;
+    console.error('AI Match error:', err);
+    showResultState('error');
+    $('#match-error').textContent = err.kind === 'rate'
+      ? 'Too many requests from your network right now. Please try again in a little while.'
+      : 'Something went wrong while analyzing. Check your connection and try again.';
+  } finally {
+    clearInterval(loadingTimer);
+    label.textContent = 'Analyze fit';
+    updateRateDisplay();
   }
-}
+});
 
-function renderMatchPanel(match) {
-  const CIRCUMFERENCE = 263.9; // 2π × r42
-  const score  = Math.min(100, Math.max(0, match.score));
-  const fill   = document.getElementById('score-ring-fill');
-  const numEl  = document.getElementById('score-number');
+function renderMatch(r) {
+  const CIRC  = 2 * Math.PI * 42;
+  const score = Math.max(0, Math.min(100, Math.round(Number(r.score) || 0)));
+  const fill  = $('#score-ring-fill');
+  const num   = $('#score-number');
+  const color = score >= 70 ? 'var(--good)' : score >= 50 ? 'var(--warn)' : 'var(--bad)';
 
-  // Ring color
-  const color = score >= 70 ? '#22c55e' : score >= 50 ? '#f59e0b' : '#ef4444';
   fill.style.stroke = color;
+  fill.style.strokeDasharray = CIRC;
+  fill.style.strokeDashoffset = CIRC;
+  $('#verdict').textContent = r.verdict || (score >= 70 ? 'Strong fit' : score >= 50 ? 'Moderate fit' : 'Weak fit');
 
-  // Animate ring and counter
-  const start     = performance.now();
-  const duration  = 1200;
-  function tick(now) {
-    const p       = Math.min((now - start) / duration, 1);
-    const eased   = 1 - Math.pow(1 - p, 3);
-    numEl.textContent           = Math.round(eased * score);
-    fill.style.strokeDashoffset = CIRCUMFERENCE * (1 - eased * score / 100);
+  const start = performance.now();
+  const duration = reduceMotion ? 0 : 1100;
+  (function tick(now) {
+    const p = duration ? Math.min((now - start) / duration, 1) : 1;
+    const eased = 1 - Math.pow(1 - p, 3);
+    num.textContent = Math.round(eased * score);
+    fill.style.strokeDashoffset = CIRC * (1 - (eased * score) / 100);
     if (p < 1) requestAnimationFrame(tick);
-  }
-  fill.style.strokeDasharray  = CIRCUMFERENCE;
-  fill.style.strokeDashoffset = CIRCUMFERENCE;
-  requestAnimationFrame(tick);
+  })(start);
 
-  // Strengths
-  const strengthsEl = document.getElementById('match-strengths');
-  strengthsEl.innerHTML =
-    `<div class="score-group-label strength">Strengths</div>` +
-    (match.strengths || []).map(s =>
-      `<div class="score-item strength"><span class="bullet">✓</span><span>${escHtml(s)}</span></div>`
-    ).join('');
+  const item = (cls, mark, t) =>
+    `<div class="fit-item ${cls}"><span class="mark" aria-hidden="true">${mark}</span><span>${escHtml(t)}</span></div>`;
+  $('#pane-fit').innerHTML =
+    `<h4 class="good">Strengths</h4>` +
+    (r.strengths || []).map(s => item('good', '✓', s)).join('') +
+    `<h4 class="gap">Gaps</h4>` +
+    (r.gaps || []).map(g => item('gap', '!', g)).join('');
 
-  // Gaps
-  const gapsEl = document.getElementById('match-gaps');
-  gapsEl.innerHTML =
-    `<div class="score-group-label gap">Gaps</div>` +
-    (match.gaps || []).map(g =>
-      `<div class="score-item gap"><span class="bullet">△</span><span>${escHtml(g)}</span></div>`
-    ).join('');
-}
-
-function renderCoverLetter(text) {
-  const el = document.getElementById('cover-letter-body');
-  const paragraphs = text.split(/\n\n+/).filter(p => p.trim());
-  el.innerHTML = paragraphs
+  $('#cover-letter').innerHTML = String(r.coverLetter || '')
+    .split(/\n\s*\n/)
+    .filter(p => p.trim())
     .map(p => `<p>${escHtml(p.trim()).replace(/\n/g, '<br>')}</p>`)
     .join('');
 }
 
-function copyCoverLetter() {
-  const el   = document.getElementById('cover-letter-body');
-  const text = el.innerText.trim();
-  const btn  = document.getElementById('copy-btn');
-  navigator.clipboard.writeText(text).then(() => {
-    btn.textContent = 'Copied!';
-    showToast('Cover letter copied ✓');
-    setTimeout(() => { btn.textContent = 'Copy'; }, 2000);
-  }).catch(() => {
-    // Fallback: select the text so user can Ctrl+C
-    const range = document.createRange();
-    range.selectNodeContents(el);
-    const sel = window.getSelection();
-    sel.removeAllRanges();
-    sel.addRange(range);
-    btn.textContent = 'Selected — press Ctrl+C';
-    setTimeout(() => { btn.textContent = 'Copy'; sel.removeAllRanges(); }, 3000);
+// Tabs (fit / letter) with arrow-key support
+const tabs = { fit: $('#tab-fit'), letter: $('#tab-letter') };
+function selectTab(name) {
+  Object.entries(tabs).forEach(([key, tab]) => {
+    const on = key === name;
+    tab.setAttribute('aria-selected', String(on));
+    tab.tabIndex = on ? 0 : -1;
+    $(`#${tab.getAttribute('aria-controls')}`).hidden = !on;
   });
 }
+Object.entries(tabs).forEach(([key, tab]) => {
+  tab.addEventListener('click', () => selectTab(key));
+  tab.addEventListener('keydown', e => {
+    if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+    const next = key === 'fit' ? 'letter' : 'fit';
+    selectTab(next);
+    tabs[next].focus();
+  });
+});
 
-/* =========================================================
-   RESUME — section highlight active for AI Match
-   ========================================================= */
+$('#copy-letter').addEventListener('click', async () => {
+  const ok = await copyText($('#cover-letter').innerText.trim());
+  showToast(ok ? 'Cover letter copied' : 'Copy failed — select the text instead');
+});
+
+$('#download-letter').addEventListener('click', () => {
+  const blob = new Blob([$('#cover-letter').innerText.trim()], { type: 'text/plain' });
+  const url = URL.createObjectURL(blob);
+  const a = Object.assign(document.createElement('a'), { href: url, download: 'Jacky-Liu-cover-letter.txt' });
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+});
 
 /* =========================================================
    INIT
    ========================================================= */
-document.addEventListener('DOMContentLoaded', () => {
-  fetchGitHubProjects();
-  loadAISummary();
-  highlightActiveSection();
-  updateRateDisplay();
-  updateFab();
-
-  const ta      = document.getElementById('jd-input');
-  const counter = document.getElementById('jd-counter');
-  if (ta && counter) {
-    ta.addEventListener('input', () => {
-      const len = ta.value.length;
-      counter.textContent = `${len} / 3000`;
-      counter.classList.toggle('warn', len > 2500);
-    });
-  }
-});
-
-/* =========================================================
-   TOAST — small bottom notification
-   ========================================================= */
-let toastTimer;
-function showToast(msg, ms = 1800) {
-  const toast = document.getElementById('toast');
-  if (!toast) return;
-  toast.textContent = msg;
-  toast.classList.remove('hidden');
-  // Force reflow so transition fires from hidden→visible
-  void toast.offsetWidth;
-  toast.classList.add('visible');
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => {
-    toast.classList.remove('visible');
-    setTimeout(() => toast.classList.add('hidden'), 250);
-  }, ms);
-}
-
-/* =========================================================
-   BACK-TO-TOP — show button after scroll, smooth scroll on click
-   ========================================================= */
-const backToTop = document.getElementById('back-to-top');
-if (backToTop) {
-  const toggleBackToTop = () => {
-    const show = window.scrollY > 600;
-    backToTop.classList.toggle('visible', show);
-    backToTop.classList.toggle('hidden', !show);
-  };
-  toggleBackToTop();
-  window.addEventListener('scroll', toggleBackToTop, { passive: true });
-  backToTop.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
-}
+updateCounter();
+updateRateDisplay();
+showResultState('empty');
+fetchGitHubProjects();

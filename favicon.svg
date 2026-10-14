@@ -1,12 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <rect width="100" height="100" rx="18" fill="#0a0a0f"/>
-  <text
-    x="50" y="67"
-    font-family="'Cascadia Code','Fira Code','Consolas',monospace"
-    font-size="42"
-    font-weight="700"
-    fill="#a78bfa"
-    text-anchor="middle"
-    letter-spacing="-2"
-  >JL</text>
+  <rect width="100" height="100" rx="24" fill="#16130f"/>
+  <text x="50" y="66" font-family="Georgia,'Times New Roman',serif" font-style="italic" font-size="46" font-weight="500" fill="#f6f3ee" text-anchor="middle" letter-spacing="-3">JL</text>
+  <circle cx="78" cy="24" r="7" fill="#ff7a45"/>
 </svg>
