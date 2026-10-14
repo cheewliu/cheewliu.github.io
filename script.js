@@ -305,7 +305,7 @@ function typewriter(el, text, speed = 16) {
 /* =========================================================
    AI SUMMARY — generated once per session when About scrolls in
    ========================================================= */
-const BIO_CACHE_KEY = 'ai_summary_v2';
+const BIO_CACHE_KEY = 'ai_summary_v3';
 
 async function loadAISummary() {
   const bodyEl = $('#ai-bio-body');
@@ -315,8 +315,8 @@ async function loadAISummary() {
 
   const prompt = `Write a 2-sentence professional summary for a portfolio website.
 Person: Liu Chee Wei (Jacky), R&D Software Manager at Keysight Technologies, Penang, Malaysia (promoted Sep 2026 from R&D Software Lead Engineer).
-Facts: manages a 10-engineer team building PTEM on OpenTAP for global EV/ADAS test automation; previously architected PTEM and was Scrum Master; sole software developer on the Keysight E8717A LiDAR Target Simulator and co-inventor of 2 US patents; 15 years across Keysight, WAFTECH (semiconductor equipment, C#/WPF, SECS/GEM) and co-founding a 3D printing startup; C#, C++, Python.
-Rules: third person, specific, under 55 words, plain text only, no filler or superlatives.`;
+Facts: leads the 14-engineer team that designs and builds PathWave Test Executive for Manufacturing (PTEM), Keysight's manufacturing test executive used globally; the team extends OpenTAP with platform features, instrument plugins, and test solutions for automotive and manufacturing applications; previously PTEM's lead engineer and architect (2019-2026) and Scrum Master; co-inventor of 2 US patents in automated LiDAR target simulation; 15 years across Keysight, WAFTECH (semiconductor equipment, C#/WPF, SECS/GEM) and co-founding a 3D printing startup; C#, C++, Python.
+Rules: third person, lead with PTEM and the team, specific, under 55 words, plain text only, no filler or superlatives.`;
 
   try {
     const summary = await callClaude({
@@ -348,24 +348,24 @@ const RESUME_TEXT = `Liu Chee Wei (Jacky) | R&D Software Manager | Penang, Malay
 linkedin.com/in/jacky-liu-chee-wei | github.com/cheewliu | cheewei.1988@gmail.com
 
 SUMMARY
-R&D Software Manager at Keysight Technologies leading a 10-engineer team that builds PTEM on OpenTAP for global EV/ADAS test automation programs. 15 years across automotive test automation, semiconductor equipment software and a startup. Previously architected PTEM as lead engineer; sole software developer on the Keysight E8717A LiDAR Target Simulator and co-inventor of two US patents. Hands-on in C#, C++ and Python; applies AI where it gives real engineering leverage.
+R&D Software Manager at Keysight Technologies, leading a 14-engineer team that designs and builds PathWave Test Executive for Manufacturing (PTEM), a manufacturing test executive used globally. The team extends OpenTAP with platform features, instrument plugins, and test solutions for automotive and manufacturing applications. Previously PTEM's lead engineer and architect (2019–2026). 15 years in test and automation software; co-inventor of two US patents in automated LiDAR target simulation. Hands-on in C#, C++ and Python; applies AI where it gives real engineering leverage.
 
 SKILLS
 Leadership: Engineering management, hiring and coaching, roadmapping, Scrum Master, Agile delivery, release process
 Languages: C#, WPF, C++, Python, JavaScript, PowerShell
-Platforms & Tools: OpenTAP, PTEM, .NET, Git, Cloudflare Workers, Claude API
-Domain: EV/ADAS, LiDAR, HIL Testing, CAN/LIN, SECS/GEM, Automotive SPICE, EV Manufacturing Testing
+Platforms & Tools: PTEM, OpenTAP, .NET, Git, Cloudflare Workers, Claude API
+Domain: Manufacturing test, automotive test, instrument automation and plugins, LiDAR/ADAS, SECS/GEM
 
 EXPERIENCE
 R&D Software Manager | Keysight Technologies Malaysia | Sep 2026 – Present
-- Manage a 10-engineer R&D software team delivering PTEM on OpenTAP for global EV/ADAS test automation programs
-- Own team roadmap, delivery planning and stakeholder alignment across global automotive programs
-- Hire, coach and develop engineers; run performance reviews and career growth plans
+- Lead a 14-engineer R&D team designing and building PTEM (PathWave Test Executive for Manufacturing), used by customers globally
+- Drive the PTEM roadmap on OpenTAP: user-facing platform features, instrument plugins, and test solutions for automotive and manufacturing applications
+- Hire, coach and develop engineers; own delivery planning and stakeholder alignment across global programs
 
 R&D Software Lead Engineer | Keysight Technologies Malaysia | Oct 2019 – Aug 2026
-- Led a team of 10 on PTEM architecture and development, built on OpenTAP, for global EV/ADAS test automation programs
-- Scrum Master; established the SQ release process across global automotive programs
-- Sole software developer on the 4-engineer LiDAR Target Simulator team; co-invented 2 US patents in 2 years; productized as Keysight E8717A
+- Led a team of 10 on PTEM architecture and development on OpenTAP, from platform features to instrument plugins
+- Scrum Master; established the SQ release process across global programs
+- Sole software developer on the LiDAR Target Simulator project; co-invented 2 US patents in automated LiDAR target simulation scanning
 
 Motion Control & Software Dev Senior Engineer | WAFTECH | Apr 2016 – Sep 2019
 - Built next-generation machine control software in C# and WPF

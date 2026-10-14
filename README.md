@@ -12,7 +12,7 @@ Personal portfolio site for Liu Chee Wei (Jacky) — R&D Software Manager specia
 - **AI Match** — paste any job description (or try a sample) to get a match score, strengths, gaps and a tailored cover letter in one structured API call
 - **GitHub Projects** — live repo grid fetched from the GitHub API
 - **Inline Resume** — styled HTML resume with PDF download via browser print
-- **Editorial design** — Fraunces + Geist type, warm paper palette, light/dark themes that follow the OS, fully responsive
+- **Engineering-blueprint design** — IBM Plex Sans + Mono, blueprint grid, PTEM system diagram, light/dark themes that follow the OS, fully responsive
 
 ## Tech
 

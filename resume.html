@@ -7,13 +7,13 @@
   <meta http-equiv="X-Content-Type-Options" content="nosniff" />
   <meta name="referrer" content="strict-origin-when-cross-origin" />
   <title>Liu Chee Wei (Jacky) — Résumé | R&D Software Manager</title>
-  <meta name="description" content="Résumé of Liu Chee Wei (Jacky), R&D Software Manager at Keysight Technologies. 15 years in EV/ADAS test automation, OpenTAP/PTEM, LiDAR and semiconductor equipment software. Co-inventor of 2 US patents. Penang, Malaysia." />
+  <meta name="description" content="Résumé of Liu Chee Wei (Jacky), R&D Software Manager at Keysight Technologies leading the 14-engineer team behind PathWave Test Executive for Manufacturing (PTEM). 15 years in test and automation software. Co-inventor of 2 US patents." />
   <meta name="author" content="Liu Chee Wei" />
   <meta name="robots" content="index, follow" />
-  <meta name="keywords" content="Liu Chee Wei, Jacky Liu, resume, R&D software manager, engineering manager, EV ADAS test automation, OpenTAP, PTEM, LiDAR, Keysight Technologies, Penang Malaysia, C#, C++, Python, HIL testing, software architect, US patent inventor, Scrum Master" />
+  <meta name="keywords" content="Liu Chee Wei, Jacky Liu, resume, R&D software manager, engineering manager, PTEM, PathWave Test Executive for Manufacturing, OpenTAP, manufacturing test, Keysight Technologies, Penang Malaysia, C#, C++, Python, LiDAR patents" />
   <link rel="canonical" href="https://cheewliu.github.io/resume.html" />
   <meta property="og:title" content="Liu Chee Wei (Jacky) — Résumé" />
-  <meta property="og:description" content="R&D Software Manager · 15 years in EV/ADAS test automation · 2 US patents · OpenTAP/PTEM · Keysight Technologies" />
+  <meta property="og:description" content="R&D Software Manager · Leading the 14-engineer PTEM team at Keysight · 2 US patents · 15 years in test software" />
   <meta property="og:url" content="https://cheewliu.github.io/resume.html" />
   <meta property="og:type" content="profile" />
   <meta property="og:image" content="https://cheewliu.github.io/assets/profile.jpg" />
@@ -28,13 +28,13 @@
   <meta property="profile:username" content="cheewliu" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Liu Chee Wei (Jacky) — Résumé" />
-  <meta name="twitter:description" content="R&D Software Manager · 15 years in EV/ADAS test automation · 2 US patents" />
+  <meta name="twitter:description" content="R&D Software Manager · Leading the 14-engineer PTEM team at Keysight · 2 US patents" />
   <meta name="twitter:image" content="https://cheewliu.github.io/assets/profile.jpg" />
-  <meta name="theme-color" content="#f6f3ee" />
+  <meta name="theme-color" content="#f5f7fa" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..600&family=Geist:wght@400..700&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -80,21 +80,22 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --ink:    #16130f;
-      --ink-2:  #3f3a33;
-      --ink-3:  #6f675d;
-      --line:   #e2dbd0;
-      --accent: #c2410c;
+      --ink:    #0b1220;
+      --ink-2:  #3b4658;
+      --ink-3:  #5f6b80;
+      --line:   #dde3ea;
+      --accent: #1d4ed8;
+      --ptem:   #5b2a86;
       --paper:  #ffffff;
-      --desk:   #efeae2;
-      --serif:  'Fraunces', Georgia, serif;
-      --sans:   'Geist', 'Segoe UI', system-ui, -apple-system, sans-serif;
+      --desk:   #eef1f5;
+      --sans:   'IBM Plex Sans', 'Segoe UI', system-ui, -apple-system, sans-serif;
+      --mono:   'IBM Plex Mono', Consolas, monospace;
     }
 
     html { background: var(--desk); }
     body {
       font-family: var(--sans);
-      font-size: 9.6pt;
+      font-size: 9.5pt;
       line-height: 1.5;
       color: var(--ink);
       -webkit-font-smoothing: antialiased;
@@ -106,69 +107,62 @@
       position: sticky; top: 0; z-index: 10;
       display: flex; justify-content: space-between; align-items: center; gap: 12px;
       max-width: 210mm; margin: 0 auto; padding: 14px 4px;
-      background: var(--desk);
-      font-size: 13px;
+      background: var(--desk); font-size: 13.5px;
     }
     .toolbar a { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; }
     .toolbar .back { color: var(--ink-2); }
     .toolbar .back:hover { color: var(--accent); }
-    .toolbar .dl {
-      height: 38px; padding: 0 16px; border-radius: 999px;
-      background: var(--ink); color: #fff;
-    }
-    .toolbar .dl:hover { background: var(--accent); }
+    .toolbar .dl { height: 36px; padding: 0 14px; border-radius: 6px; background: var(--accent); color: #fff; }
+    .toolbar .dl:hover { background: #1e40af; }
 
     /* ── Sheet ── */
     .sheet {
-      max-width: 210mm;
-      margin: 0 auto 48px;
-      padding: 15mm 16mm;
+      max-width: 210mm; margin: 0 auto 48px;
+      padding: 14mm 16mm;
       background: var(--paper);
-      box-shadow: 0 1px 2px rgba(22,19,15,.05), 0 20px 40px -20px rgba(22,19,15,.25);
-      border-radius: 4px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
     }
 
     /* ── Header ── */
     .r-header {
       display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 6mm; align-items: end;
-      padding-bottom: 5mm; margin-bottom: 5mm;
-      border-bottom: 1.5pt solid var(--ink);
+      padding-bottom: 4.5mm; margin-bottom: 4.5mm;
+      border-bottom: 2pt solid var(--accent);
     }
-    .r-name {
-      font-family: var(--serif);
-      font-size: 26pt; font-weight: 500; line-height: 1;
-      letter-spacing: -0.02em;
-      font-variation-settings: 'opsz' 144;
-    }
-    .r-title { margin-top: 2.5mm; font-size: 11pt; font-weight: 600; color: var(--accent); }
-    .r-tagline { margin-top: 1mm; font-size: 9.2pt; color: var(--ink-3); }
-    .r-contact { display: grid; gap: 1mm; text-align: right; font-size: 8.6pt; color: var(--ink-2); }
+    .r-name { font-size: 23pt; font-weight: 700; line-height: 1.05; letter-spacing: -0.02em; }
+    .r-title { margin-top: 2mm; font-size: 11pt; font-weight: 600; color: var(--accent); }
+    .r-tagline { margin-top: .8mm; font-family: var(--mono); font-size: 8pt; color: var(--ink-3); letter-spacing: .02em; }
+    .r-contact { display: grid; gap: .8mm; text-align: right; font-size: 8.6pt; color: var(--ink-2); font-style: normal; }
     .r-contact a:hover { color: var(--accent); }
 
     /* ── Sections ── */
-    .r-section { margin-bottom: 4.6mm; }
+    .r-section { margin-bottom: 4.4mm; }
     .r-section-title {
       display: flex; align-items: center; gap: 3mm;
-      font-size: 7.6pt; font-weight: 700;
-      text-transform: uppercase; letter-spacing: .14em;
-      color: var(--ink);
-      margin-bottom: 2.6mm;
+      font-family: var(--mono); font-size: 7.8pt; font-weight: 600;
+      text-transform: uppercase; letter-spacing: .12em; color: var(--accent);
+      margin-bottom: 2.4mm;
+      break-after: avoid;
     }
     .r-section-title::after { content: ''; flex: 1; height: .6pt; background: var(--line); }
 
-    .r-summary { font-size: 9.8pt; color: var(--ink-2); line-height: 1.6; }
+    .r-summary { font-size: 9.6pt; color: var(--ink-2); line-height: 1.58; }
     .r-summary strong { color: var(--ink); font-weight: 600; }
 
     .r-highlights {
-      display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 3mm;
+      display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
       margin-top: 3.4mm;
+      border: .6pt solid var(--line); border-radius: 4px;
     }
-    .r-hl { border-left: 1.5pt solid var(--accent); padding: .4mm 0 .4mm 2.6mm; }
-    .r-hl b { display: block; font-family: var(--serif); font-size: 14pt; font-weight: 500; line-height: 1.1; }
+    .r-hl { padding: 2.2mm 3mm; }
+    .r-hl + .r-hl { border-left: .6pt solid var(--line); }
+    .r-hl b { display: block; font-size: 14pt; font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; }
+    .r-hl b.ptem { color: var(--ptem); }
     .r-hl span { font-size: 7.8pt; color: var(--ink-3); line-height: 1.3; display: block; margin-top: .6mm; }
 
     /* ── Jobs ── */
-    .r-company { margin-bottom: 3.6mm; break-inside: avoid; }
+    .r-company { margin-bottom: 3.4mm; break-inside: avoid; }
     .r-company-head {
       display: flex; justify-content: space-between; align-items: baseline; gap: 4mm;
       margin-bottom: 1.2mm;
@@ -176,54 +170,53 @@
     .r-company-name { font-size: 10.4pt; font-weight: 700; }
     .r-company-place { font-size: 8.6pt; color: var(--ink-3); }
 
-    .r-role { margin-bottom: 2.4mm; break-inside: avoid; }
+    .r-role { margin-bottom: 2.2mm; break-inside: avoid; padding-left: 3mm; border-left: 1pt solid var(--line); }
+    .r-role.current { border-left-color: var(--accent); }
     .r-role-head { display: flex; justify-content: space-between; align-items: baseline; gap: 4mm; }
-    .r-role-title { font-size: 9.8pt; font-weight: 600; color: var(--ink); }
-    .r-role-title em { font-style: normal; font-weight: 500; color: var(--accent); font-size: 8pt; margin-left: 1.5mm; }
-    .r-period { font-size: 8.6pt; color: var(--ink-3); white-space: nowrap; font-variant-numeric: tabular-nums; }
+    .r-role-title { font-size: 9.8pt; font-weight: 600; }
+    .r-period { font-family: var(--mono); font-size: 8pt; color: var(--ink-3); white-space: nowrap; }
 
-    .r-bullets { margin-top: 1mm; }
+    .r-bullets { margin-top: .8mm; }
     .r-bullets li {
-      list-style: none;
-      position: relative;
-      padding-left: 3.6mm;
-      margin-bottom: .7mm;
-      font-size: 9.2pt; color: var(--ink-2);
+      list-style: none; position: relative;
+      padding-left: 3.4mm; margin-bottom: .6mm;
+      font-size: 9.1pt; color: var(--ink-2);
     }
     .r-bullets li::before {
-      content: ''; position: absolute; left: .3mm; top: .62em;
+      content: ''; position: absolute; left: .2mm; top: .64em;
       width: 1.6mm; height: .8pt; background: var(--accent);
     }
     .r-bullets strong { color: var(--ink); font-weight: 600; }
 
-    /* ── Two-column lower block ── */
+    /* ── Lower block ── */
     .r-cols { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 7mm; break-inside: avoid; }
-    .r-section-title { break-after: avoid; }
 
-    .r-skills { display: grid; gap: 1.6mm; }
+    .r-skills { display: grid; gap: 1.5mm; }
     .r-skill { display: grid; grid-template-columns: 22mm minmax(0, 1fr); gap: 3mm; font-size: 9pt; }
-    .r-skill dt { font-weight: 600; color: var(--ink); }
+    .r-skill dt { font-weight: 600; }
     .r-skill dd { color: var(--ink-2); }
 
     .r-item { margin-bottom: 2mm; break-inside: avoid; }
     .r-item-head { display: flex; justify-content: space-between; align-items: baseline; gap: 3mm; }
     .r-item-name { font-size: 9.2pt; font-weight: 600; }
     .r-item-sub { font-size: 8.6pt; color: var(--ink-3); }
-    .r-patent-num { font-size: 8.4pt; font-weight: 700; color: var(--accent); letter-spacing: .02em; font-variant-numeric: tabular-nums; }
+    .r-patent-num { font-family: var(--mono); font-size: 8.4pt; font-weight: 600; color: var(--accent); }
 
     .r-foot {
-      margin-top: 5mm; padding-top: 2.4mm;
+      margin-top: 4mm; padding-top: 2.2mm;
       border-top: .6pt solid var(--line);
       display: flex; justify-content: space-between;
-      font-size: 7.6pt; color: var(--ink-3);
+      font-family: var(--mono); font-size: 7.4pt; color: var(--ink-3);
     }
 
     @media (max-width: 720px) {
-      .sheet { padding: 24px 18px; margin: 0 0 24px; border-radius: 0; }
+      .sheet { padding: 24px 18px; margin: 0 0 24px; border-radius: 0; border-left: 0; border-right: 0; }
       .toolbar { padding: 12px 16px; }
       .r-header { grid-template-columns: 1fr; }
       .r-contact { text-align: left; }
       .r-highlights { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .r-hl:nth-child(3) { border-left: 0; }
+      .r-hl:nth-child(n+3) { border-top: .6pt solid var(--line); }
       .r-cols { grid-template-columns: 1fr; }
       .r-company-head, .r-role-head { flex-wrap: wrap; }
     }
@@ -232,8 +225,7 @@
       @page { size: A4; margin: 12mm 14mm; }
       html, body { background: #fff; }
       .toolbar { display: none; }
-      .sheet { max-width: none; margin: 0; padding: 0; box-shadow: none; border-radius: 0; }
-      a { color: inherit; }
+      .sheet { max-width: none; margin: 0; padding: 0; border: 0; border-radius: 0; }
     }
   </style>
 </head>
@@ -255,10 +247,10 @@
     <header class="r-header">
       <div>
         <h1 class="r-name">Liu Chee Wei (Jacky)</h1>
-        <p class="r-title">R&amp;D Software Manager</p>
-        <p class="r-tagline">Engineering leadership · EV/ADAS test automation · OpenTAP/PTEM · LiDAR</p>
+        <p class="r-title">R&amp;D Software Manager · PTEM</p>
+        <p class="r-tagline">ENGINEERING LEADERSHIP · MANUFACTURING TEST · OPENTAP · INSTRUMENT AUTOMATION</p>
       </div>
-      <address class="r-contact" style="font-style:normal">
+      <address class="r-contact">
         <span>Penang, Malaysia</span>
         <a href="mailto:cheewei.1988@gmail.com">cheewei.1988@gmail.com</a>
         <a href="https://linkedin.com/in/jacky-liu-chee-wei">linkedin.com/in/jacky-liu-chee-wei</a>
@@ -269,17 +261,18 @@
     <section class="r-section">
       <h2 class="r-section-title">Profile</h2>
       <p class="r-summary">
-        R&amp;D Software Manager at Keysight Technologies, leading a <strong>10-engineer team</strong> that builds PTEM on OpenTAP
-        for global EV/ADAS test automation programs. Promoted in September 2026 after seven years as the platform's lead engineer
-        and architect. <strong>15 years</strong> across automotive test, semiconductor equipment software and a startup.
-        Sole software developer on the Keysight E8717A LiDAR Target Simulator and <strong>co-inventor of two US patents</strong>.
-        Hands-on in C#, C++ and Python, with a practical approach to applying AI where it gives real engineering leverage.
+        R&amp;D Software Manager at Keysight Technologies, leading a <strong>14-engineer team</strong> that designs and builds
+        <strong>PathWave Test Executive for Manufacturing (PTEM)</strong>, a manufacturing test executive used globally.
+        The team extends OpenTAP with platform features, instrument plugins, and test solutions for automotive and
+        manufacturing applications. Previously PTEM's lead engineer and architect (2019–2026).
+        <strong>15 years</strong> in test and automation software; <strong>co-inventor of two US patents</strong> in automated
+        LiDAR target simulation. Hands-on in C#, C++ and Python.
       </p>
       <div class="r-highlights">
-        <div class="r-hl"><b>10</b><span>engineers led on PTEM / OpenTAP</span></div>
-        <div class="r-hl"><b>2</b><span>US patents in LiDAR target simulation</span></div>
-        <div class="r-hl"><b>E8717A</b><span>Keysight product, sole software developer</span></div>
-        <div class="r-hl"><b>15 yrs</b><span>automotive &amp; semiconductor software</span></div>
+        <div class="r-hl"><b>14</b><span>engineers led on PTEM</span></div>
+        <div class="r-hl"><b class="ptem">PTEM</b><span>manufacturing test executive, used globally</span></div>
+        <div class="r-hl"><b>2</b><span>US patents, LiDAR target simulation</span></div>
+        <div class="r-hl"><b>15 yrs</b><span>test &amp; automation software</span></div>
       </div>
     </section>
 
@@ -292,15 +285,15 @@
           <span class="r-company-place">Penang, Malaysia</span>
         </div>
 
-        <div class="r-role">
+        <div class="r-role current">
           <div class="r-role-head">
-            <span class="r-role-title">R&amp;D Software Manager <em>Promoted</em></span>
+            <span class="r-role-title">R&amp;D Software Manager</span>
             <span class="r-period">Sep 2026 – Present</span>
           </div>
           <ul class="r-bullets">
-            <li>Manage a <strong>10-engineer R&amp;D software team</strong> delivering PTEM on OpenTAP for global EV/ADAS test automation programs.</li>
-            <li>Own the team roadmap, delivery planning and stakeholder alignment across global automotive programs.</li>
-            <li>Hire, coach and develop engineers; run performance reviews and career growth plans.</li>
+            <li>Lead a <strong>14-engineer R&amp;D team</strong> designing and building <strong>PTEM</strong> (PathWave Test Executive for Manufacturing), used by customers globally.</li>
+            <li>Drive the PTEM roadmap on OpenTAP: user-facing platform features, instrument plugins, and test solutions for automotive and manufacturing applications.</li>
+            <li>Hire, coach and develop engineers; own delivery planning and stakeholder alignment across global programs.</li>
           </ul>
         </div>
 
@@ -310,9 +303,9 @@
             <span class="r-period">Oct 2019 – Aug 2026</span>
           </div>
           <ul class="r-bullets">
-            <li>Led a team of 10 on <strong>PTEM architecture and development</strong>, built on OpenTAP, for global EV/ADAS test automation programs.</li>
-            <li>Scrum Master for the team; <strong>established the SQ release process</strong> across global automotive programs.</li>
-            <li>Sole software developer on the 4-engineer LiDAR Target Simulator team; <strong>co-invented 2 US patents in 2 years</strong>; productized as the Keysight E8717A.</li>
+            <li>Led a team of 10 on <strong>PTEM architecture and development</strong> on OpenTAP, from platform features to instrument plugins.</li>
+            <li>Scrum Master; <strong>established the SQ release process</strong> across global programs.</li>
+            <li>Sole software developer on the LiDAR Target Simulator project; <strong>co-invented 2 US patents</strong> in automated LiDAR target simulation scanning.</li>
           </ul>
         </div>
       </div>
@@ -382,9 +375,9 @@
         <h2 class="r-section-title">Skills</h2>
         <dl class="r-skills">
           <div class="r-skill"><dt>Leadership</dt><dd>Engineering management, hiring &amp; coaching, roadmapping, Scrum Master, release process</dd></div>
+          <div class="r-skill"><dt>Platforms</dt><dd>PTEM, OpenTAP, .NET, WPF, Git, Claude API</dd></div>
           <div class="r-skill"><dt>Languages</dt><dd>C#, C/C++, Python, JavaScript, PowerShell</dd></div>
-          <div class="r-skill"><dt>Platforms</dt><dd>OpenTAP, PTEM, .NET, WPF, Git, Claude API, Cloudflare Workers</dd></div>
-          <div class="r-skill"><dt>Domain</dt><dd>EV/ADAS testing, LiDAR, HIL, CAN/LIN, SECS/GEM, Automotive SPICE</dd></div>
+          <div class="r-skill"><dt>Domain</dt><dd>Manufacturing test, automotive test, instrument automation, LiDAR/ADAS, SECS/GEM</dd></div>
           <div class="r-skill"><dt>Spoken</dt><dd>Chinese (native), English (professional), Malay (conversational)</dd></div>
         </dl>
       </section>
