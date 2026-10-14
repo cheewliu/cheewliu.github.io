@@ -347,11 +347,11 @@ Rules: third person, specific about tech and domain, under 65 words, no filler p
 /* =========================================================
    RECRUITER AI TOOL
    ========================================================= */
-const RESUME_TEXT = `Liu Chee Wei (Jacky) | R&D Software Lead Engineer | Penang, Malaysia
+const RESUME_TEXT = `Liu Chee Wei (Jacky) | R&D Software Manager | Penang, Malaysia
 linkedin.com/in/jacky-liu-chee-wei | github.com/cheewliu | cheewei.1988@gmail.com
 
 SUMMARY
-Software architect and lead engineer with 13+ years across automotive test automation, semiconductor equipment, and entrepreneurship. At Keysight Technologies, led the architecture of PTEM on OpenTAP for global EV/ADAS programs and co-invented two US-patented LiDAR simulation systems.
+R&D software manager and architect with 13+ years across automotive test automation, semiconductor equipment, and entrepreneurship. At Keysight Technologies, manages the R&D software team behind PTEM after leading its architecture on OpenTAP for global EV/ADAS programs and co-invented two US-patented LiDAR simulation systems.
 
 SKILLS
 Languages: C#, WPF, C++, Python, JavaScript, PowerShell
@@ -360,9 +360,14 @@ Domain: EV/ADAS, LiDAR, HIL Testing, SECS/GEM, Automotive SPICE, EV Manufacturin
 Leadership: Scrum Master, Software Architecture, Agile, Test Automation
 
 EXPERIENCE
-R&D Software Lead Engineer | Keysight Technologies Malaysia | Oct 2019 – Present
-- Lead a team of 10 engineers on PTEM architecture and development, built on OpenTAP for global EV/ADAS test automation programs
-- Serve as Scrum Master; established SQ release process across global automotive programs
+R&D Software Manager | Keysight Technologies Malaysia | Sep 2026 – Present
+- Manage an R&D software team of 10 engineers delivering PTEM on OpenTAP for global EV/ADAS test automation programs
+- Own team roadmap, delivery planning, and stakeholder alignment across global automotive programs
+- Drive hiring, performance reviews, and career development for the engineering team
+
+R&D Software Lead Engineer | Keysight Technologies Malaysia | Oct 2019 – Aug 2026
+- Led a team of 10 engineers on PTEM architecture and development, built on OpenTAP for global EV/ADAS test automation programs
+- Served as Scrum Master; established SQ release process across global automotive programs
 - Main developer on the LiDAR Target Simulator project; co-invented 2 US patents within 2 years as part of a 4-engineer team; productized as Keysight E8717A
 
 Motion Control & Software Dev Senior Engineer | WAFTECH | Apr 2016 – Sep 2019

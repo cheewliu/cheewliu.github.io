@@ -1,6 +1,6 @@
 # CLAUDE.md — Project Overview
 
-Personal portfolio site for **Liu Chee Wei (Jacky)**, R&D Software Lead Engineer at Keysight Technologies.  
+Personal portfolio site for **Liu Chee Wei (Jacky)**, R&D Software Manager at Keysight Technologies.  
 Live at: https://cheewliu.github.io  
 Repo: https://github.com/cheewliu/cheewliu.github.io
 

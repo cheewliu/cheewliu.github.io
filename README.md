@@ -1,6 +1,6 @@
 # cheewliu.github.io
 
-Personal portfolio site for Liu Chee Wei (Jacky) — R&D Software Lead Engineer specialising in EV/ADAS test automation, OpenTAP/PTEM, and LiDAR systems.
+Personal portfolio site for Liu Chee Wei (Jacky) — R&D Software Manager specialising in EV/ADAS test automation, OpenTAP/PTEM, and LiDAR systems.
 
 **Live site → [cheewliu.github.io](https://cheewliu.github.io)**
 
